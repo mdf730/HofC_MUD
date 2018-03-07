@@ -24,22 +24,551 @@ typedef struct object {
 extern OBJECT objs[];
 
 - entrance
-     description "An entrance"
+     description "Entrance"
      tags        "entrance"
      details     "A weathered stone doorway attached to the cliffside stands to your East, vines crawl across the aged rock and water trickles down the jagged precipice and forms pool at its feet. To your West is the road back to the village, spanning across a lush green field. Birds can be heard chirping in the distance.\n"
      capacity    9999
 
-- fountain
-     description "A fountain is in the center of the room"
-     tags        "fountain"
+- wallEntrance
+     description "a lush field"
+     tags        "north", "south", "field"
+     location    entrance
+     destination entrance
+     details     "A field spreads as far as you can see.\n"
+     textGo      "You stare off into the distance at the field, but remain where you are.\n"
+
+- intoFountain
+     description "a stone doorway to the east"
+     tags        "east", "door", "doorway", "cliffside"
+     location    entrance
+     destination fountainRoom
+     details     "Vines crawl across the aged rock and water trickles down the jagged precipice and forms pool at its feet.\n"
+     textGo      "You walk through the doorway.\n"
+     open        isAlreadyOpen
+
+- intoVillage
+     description "a road to your west"
+     tags        "west", "path", "village"
+     location    entrance
+     destination village
+     details     "To your West is the road back to the village, spanning across a lush green field.\n"
+     textGo      "You walk down the winding road back home.\n"
+     open        isAlreadyOpen
+
+- village
+     description "Village"
+     tags        "village"
+     details     "No adventerous spirit in you, eh? How can you win the game you don't attempt?\n"
+     capacity    9999
+
+- wallVillage
+     description "a lively village"
+     tags        "north", "south", "east"
+     location    village
+     destination village
+     details     "You see many familiar faces as you explore the village.\n"
+     textGo      "You make your way through the village.\n"
+
+- villageToEntrance
+     description "path to entrance"
+     tags        "west"
+     location    village
+     destination entrance
+     details     "A path leads to the entrance.\n"
+     textGo      "You walk back down the path.\n"
+     open        isAlreadyOpen
+
+- fountainRoom
+     description "Fountain Room"
+     tags        "fountainRoom"
      details     "The room is dimly lit with torch light, yet the air feels damp and humid. A running fountain can be seen in the center of the space; a circular pool with the statue of a goblin spews water from its mouth. Moss grows from the stonework surrounding the fountain and is interspersed around the room structure. There are wooden doors to your North and East.\n"
      capacity    9999
 
+- wallFountain
+     tags        "south"
+     location    fountainRoom
+     destination fountainRoom
+     details     "A nondescript wall on the south end of the room.\n"
+     textGo      "You run into the wall, receiving a bruise on your chin for the effort. This isn't Hogwarts...\n"
+
+- intoEntrance
+     description "a stone doorway to the west"
+     tags        "west"
+     location    fountainRoom
+     destination entrance
+     details     "A weathered stone doorway attached to the cliffside\n"
+     textGo      "You walk through the doorway.\n"
+     open        isAlreadyOpen
+
+- intoTrader
+     description "a wooden doorway to the east"
+     tags        "east"
+     location    fountainRoom
+     destination trader
+     details     "A wooden doorway is slightly ajar. A warm light filters in through the crack.\n"
+     textGo      "You walk through the doorway.\n"
+     open        isAlreadyOpen
+
+- intoPit
+     condition   { return polishedKey->location == player; }
+     description "an unlocked doorway to the north"
+     tags        "north"
+     location    fountainRoom
+     destination pit
+     details     "A wooden doorway is closed. A lock, now open, gleams under the door's handle.\n"
+     textGo      "You walk through the doorway.\n"
+     open        isAlreadyOpen
+
+- intoPitBlocked
+     condition   { return polishedKey->location != player; }
+     description "a locked doorway to the north"
+     tags        "north"
+     location    fountainRoom
+     prospect    pit
+     details     "A wooden doorway is closed. A lock gleams under the door's handle.\n"
+     textGo      "The lock rattles. You can't break through.\n"
+     open        isAlreadyOpen
+
+- objectFountain
+     description "a fountain"
+     tags        "fountain", "goblin fountain"
+     location    fountainRoom
+     details     "The water is clear and pristine, the bottom of the fountain is a gravel pattern. At the bottom of the fountain you see something glimmer. It’s a gold coin! It twinkles as the water moves about the surface, refracting the light over it.\n"
+     weight      100
+
+- coin
+     description "a gold coin"
+     tags        "gold", "coin", "gold coin"
+     location    objectFountain
+     details     "The shiny coin glimmers with a distinct glint.\n"
+     weight      1
+
 - trader
-     description "a trader"
+     description "Trader Room"
      tags        "trader"
      details     "The room is small but well lit, a goblin sits at the other end of the room and looks at you curiously. On a tattered mat colored with patterns of red and violet is spread out various items, many with distinct shines and gleams. There is a wooden door to your West and a strange pattern of bricks on the wall to your South\n"
      capacity    9999
+
+- mat
+     description "a colorful mat"
+     tags        "mat", "rug", "colorful mat"
+     location    trader
+     details     "Spread across the mat in careful tidy rows are various objects, such as smoothed glass, bent silverware, and a single polished key. The goblin guards over the objects closely, preventing them from being taken.\n"
+     weight       9999
+
+- traderWall
+     tags        "north", "east"
+     location    trader
+     destination trader
+     details     "The wall is dirty. Upon closer inspection, the wall is very dirty.\n"
+     textGo      "You can't walk through a solid wall...\n"
+
+- traderToFountain
+     description "a wooden doorway to the west"
+     tags        "west"
+     location    trader
+     destination fountainRoom
+     details     "A wooden doorway is ajar. It leads back to the fountain room.\n"
+     textGo      "You walk through the doorway.\n"
+     open        isAlreadyOpen
+
+- traderToSecret
+     condition   { return traderToSecretBlocked->health <= 0; }
+     description "a hole in the wall to the south"
+     tags        "south"
+     location    trader
+     destination secret
+     details     "The wall has been broken through, showing a hidden room that lays beyond.\n"
+     textGo      "You walk through the debris.\n"
+     open        isAlreadyOpen
+
+- traderToSecretBlocked
+     condition   { return traderToSecretBlocked->health > 0; }
+     description "a mysteriously colored wall to the south"
+     tags        "south"
+     location    trader
+     prospect    secret
+     details     "The wall is mysteriously colored, and a few bricks appear out of place.\n"
+     textGo      "You push on the bricks and they move ever so slightly, but not enough to walk through.\n"
+     health      1
+     open        isAlreadyOpen
+
+- secret
+     description "Secret Room"
+     tags        "secret"
+     details     "The room is covered with ornate flowery wallpaper of blues, greens, and gold. A neon sign flashes in yellow on the opposite end of the room, it reads ‘You found the secret!’ There is a wooden door to your North.\n"
+     capacity    9999
+
+- wallSecret
+     tags        "south", "east", "west"
+     location    secret
+     destination secret
+     details     "The whole room sparkles, even the wall.\n"
+     textGo      "Nope. There's only one false wall in this game.\n"
+
+- secretToTrader
+     description "wall to trader"
+     tags        "north"
+     location    secret
+     destination trader
+     details     "You've already broken through the wall, which leads back to the trader room.\n"
+     textGo      "You walk through the debris.\n"
+     open        isAlreadyOpen
+
+- pit
+     description "The Pit"
+     tags        "pit"
+     details     "The huge room expands out in front of you, in the center a round pit descends into an inky blackness. The pits diameter almost meets the sides of the room itself, but leaves enough space to allow passage around the edges. Sitting on the pits edge is a goblin, its feet dangling over. The goblin doesn’t take any notice of you but instead peers downward with a cheery smile on its face, moving its legs like pendulums. There are wooden doors to your North, East and South.\n"
+     capacity    9999
+
+- wallPit
+     tags        "west"
+     location    pit
+     destination pit
+     details     "The edge of the pit makes it impossible to reach this side of the room.\n"
+     textGo      "As you try to move west, you fall into the pit. It takes several grueling hours to make your way out.\n"
+
+- pitToFountain
+     description "a wooden doorway to the south"
+     tags        "south"
+     location    pit
+     destination fountainRoom
+     details     "A wooden doorway is closed. A lock gleams under the door's handle.\n"
+     textGo      "You walk through the doorway.\n"
+     open        isAlreadyOpen
+
+- pitToRiddler
+     description "a wooden doorway to the east"
+     tags        "east"
+     location    pit
+     destination riddler
+     details     "A wooden doorway is closed. A lock gleams under the door's handle.\n"
+     textGo      "You walk through the doorway.\n"
+     open        isAlreadyOpen
+
+- pitToBrawler
+     description "a wooden doorway to the north"
+     tags        "north"
+     location    pit
+     destination brawler
+     details     "A wooden doorway is closed. A lock gleams under the door's handle.\n"
+     textGo      "You walk through the doorway.\n"
+     open        isAlreadyOpen
+
+- brawler
+     description "The Brawler"
+     tags        "brawler"
+     details     "The room is very messy, the ground covered with bits of fractured wooden debri and other rubbish. To the East is a wooden door with the large picture of a key carved on it. Standing between you and the door is a goblin, it has wild eyes and brandishes a club. Every move you make it reacts to as to remain between you and the key door. There are wooden doors to your South and East.\n"
+     capacity    9999
+
+- club
+     description "a table leg"
+     tags        "club", "leg", "table leg"
+     location    brawler
+     details     "The table leg looks like it would make a strudy club.\n"
+     weight      1
+
+- debris
+     description "a lot of junk"
+     tags        "debris", "trash", "rubbish", "wood"
+     location    brawler
+     details     "Looking at the broken wood and other rubbish you see a table leg broken into the rough shape of a club. Nothing else looks particularly useful.\n"
+     weight      100
+
+- wallBrawler
+     tags        "north", "west"
+     location    brawler
+     destination brawler
+     details     "The walls have a stench, as if they haven't been cleaned in years.\n"
+     textGo      "You run your finger along the wall. When you pull away, a residue stays on your hand, making it sticky.\n"
+
+- brawlerToPit
+     description "a wooden doorway to the south"
+     tags        "south"
+     location    brawler
+     destination pit
+     details     "The wooden doorway leads back to the pit.\n"
+     textGo      "You walk through the doorway.\n"
+     open        isAlreadyOpen
+
+- brawlerToKey
+     description "a door to the key room"
+     tags        "east"
+     location    brawler
+     destination key
+     details     "A wooden doorway is closed. A lock gleams under the door's handle.\n"
+     textGo      "You walk through the doorway.\n"
+     open        isAlreadyOpen
+
+- key
+     description "Key Room"
+     tags        "key room"
+     details     "The room is small and made of red brick with mortar. On the wall hanging from a rusty coat hook is a single blue key. There is a wooden door to your West.\n"
+     capacity    9999
+
+- blueKey
+     description "a blue key"
+     tags        "key", "blue key"
+     location    key
+     details     "The key is a strange blue color.\n"
+     weight      1
+
+- wallKey
+     tags        "south", "east", "north"
+     location    key
+     destination key
+     details     "The walls are hidden away in shadow.\n"
+     textGo      "It's too dark to go that way.\n"
+
+- keyToBrawler
+     description "a door to the brawler room"
+     tags        "west"
+     location    key
+     destination brawler
+     details     "A wooden doorway is closed. A lock gleams under the door's handle.\n"
+     textGo      "You walk through the doorway.\n"
+     open        isAlreadyOpen
+
+- riddler
+     description "The Riddler's Room"
+     tags        "riddler"
+     details     "The long room is lit with lanterns on either sides of the walls, lavender colored wallpaper peels in flakes onto the floor. On the left side sits a goblin upon a wooden stool with a stack of books to its side. The goblin leafs through leather bound tome absentmindedly, only looking up for a second to acknowledge your presence. There are wooden doors to your East and West.\n"
+     capacity    9999
+
+- wallRiddler
+     tags        "south", "north"
+     location    riddler
+     destination riddler
+     details     "There are lanterns on the wall, illuminating wallpaper that is peeling terribly.\n"
+     textGo      "You get to close to the wall and nearly set your hair on fire from one of the lanterns.\n"
+
+- riddlerToPit
+     description "a wooden doorway to the west"
+     tags        "west"
+     location    riddler
+     destination pit
+     details     "A wooden doorway.\n"
+     textGo      "You walk through the doorway.\n"
+     open        isAlreadyOpen
+
+- riddlerToGallery
+     description "a wooden doorway to the east"
+     tags        "east"
+     location    riddler
+     destination gallery
+     details     "A wooden doorway.\n"
+     textGo      "You walk through the doorway.\n"
+     open        isAlreadyOpen
+
+- gallery
+     description "Gallery"
+     tags        "gallery"
+     details     "The long room stretches to your left and right, rose colored wallpaper peels in flakes onto the floor. Red curtains sway on either corner of the room though they seem to stop moving when you look straight at them. On the edge of the wall are three busts, the first of a goblin with its long nose pointed up, the second with its nose pointing straight ahead, and the third with its nose point down. The busts stand on pedestals and below them are square wooden buttons. There are wooden doors to your West, North, and South.\n"
+     capacity    9999
+
+- wallGallery
+     tags        "east"
+     location    gallery
+     destination gallery
+     details     "There are three busts along the wall.\n"
+     textGo      "There's nowhere to go!\n"
+
+- galleryToStore
+     description "a wooden doorway to the north"
+     tags        "north"
+     location    gallery
+     destination store
+     details     "A wooden doorway.\n"
+     textGo      "You walk through the doorway.\n"
+     open        isAlreadyOpen
+
+- galleryToGuard
+     description "a wooden doorway to the south"
+     tags        "south"
+     location    gallery
+     destination guard
+     details     "A wooden doorway.\n"
+     textGo      "You walk through the doorway.\n"
+     open        isAlreadyOpen
+
+- galleryToRiddler
+     description "a wooden doorway to the west"
+     tags        "west"
+     location    gallery
+     destination riddler
+     details     "A wooden doorway.\n"
+     textGo      "You walk through the doorway.\n"
+     open        isAlreadyOpen
+
+- store
+     description "Storeroom"
+     tags        "store"
+     details     "The small room is almost filled to the brim with barrels and crates. A dim lamp on the ceiling only barely makes the room visible. On one of the crates sits an unfurled scroll nailed to the crates frame; it has writing on it. There is a wooden door to your South.\n"
+     capacity    9999
+
+- scroll
+     description "an unfurled scroll"
+     tags        "scroll", "unfurled scroll"
+     location    store
+     details     "The scroll reads ‘Down the road three goblins strolled, moving on their way. One looked up and said to them ‘Looks like rain today.’ The other looked down and commented ‘The grounds all muddy and gray.’ The last looked forward swiftly said ‘Then quite quickly we should be on our way.’"
+     weight      9999
+
+- wallStore
+     tags        "north", "east", "west"
+     location    store
+     destination store
+     details     "There are cobwebs on the dusty walls.\n"
+     textGo      "You really don't want to touch the cobwebs on the walls.\n"
+
+- storeToGallery
+     description "a wooden doorway to the south"
+     tags        "south"
+     location    store
+     destination gallery
+     details     "A wooden doorway.\n"
+     textGo      "You walk through the doorway.\n"
+     open        isAlreadyOpen
+
+- guard
+     description "Guard Room"
+     tags        "guard"
+     details     "The room is well lit and covered with ornate silver wallpaper. To your East is a golden door with a cup image engraved on it. Between you and the golden door stands a goblin wearing armor, it holds a steel mace to its side. The goblins eyes are stern and its stance is disciplined. There is a wooden door to your North and a golden door to your East.\n"
+     capacity    9999
+
+- wallGuard
+     tags        "south", "west"
+     location    guard
+     destination guard
+     details     "There is nothing interesting on this wall.\n"
+     textGo      "Why even try at this point?\n"
+
+- guardToGallery
+     description "a wooden doorway to the north"
+     tags        "north"
+     location    guard
+     destination gallery
+     details     "A wooden doorway.\n"
+     textGo      "You walk through the doorway.\n"
+     open        isAlreadyOpen
+
+- guardToThrone
+     description "a wooden doorway to the east"
+     tags        "east"
+     location    guard
+     destination throne
+     details     "A wooden doorway.\n"
+     textGo      "You walk through the doorway.\n"
+     open        isAlreadyOpen
+
+- throne
+     description "The Throne Room"
+     tags        "throne"
+     details     "The room glimmers with jewels and fine tapestries of red and violet. Sitting on a gold throne is a goblin wearing a crown and draped in ornate robes. It holds the Goblin Goblet in its hands in front of you.\n"
+     capacity    9999
+
+- wallThrone
+     tags        "north", "south", "east"
+     location    throne
+     destination throne
+     details     "The wall is covered in tapestries of red and violet.\n"
+     textGo      "You play in the tapestry for a bit before returning to the center of the throne room.\n"
+
+- throneToGuard
+     description "a wooden doorway to the west"
+     tags        "west"
+     location    throne
+     destination guard
+     details     "A wooden doorway.\n"
+     textGo      "You walk through the doorway.\n"
+     open        isAlreadyOpen
+
+- goblinTraderNoCoin
+     condition   { return coin->location == objectFountain || coin->location == player; }
+     description "Bub the Trader of Shinies"
+     tags        "trader", "goblin trader", "goblin"
+     location    trader
+     details     "The goblin says ‘Oh hello! I am Bub the Trader of Shiny’s. I do so love shiny things, but not all shinies things are equal to me, oh no. If I had to choose to between one shiny and a shinier shiny, I’d take the shinier shiny! Find me shinier shiny and I’ll give you a less shiny shiny.’\n"
+     contents    "He has"
+     health      100
+     capacity    20
+
+- polishedKey
+     description "a polished key"
+     tags        "key", "polished key"
+     location    goblinTraderNoCoin
+     details     "The key is polished and has a dull glint.\n"
+     weight      1
+
+- goblinTraderHasCoin
+     condition   { return coin->location != objectFountain && coin->location != player; }
+     description "Bub the Trader of Shinies"
+     tags        "trader", "goblin trader", "goblin"
+     location    trader
+     details     "The goblin say’s ‘Oh yes! This is very shiny shiny! Here, you have have this less shiny shiny in return.’ The Goblin hands you a polished key.\n"
+     contents    "He has"
+     health      100
+     capacity    20
+
+- goblinBrawlerUndefeated
+     condition   { return goblinBrawlerUndefeated->health > 0; }
+     description "Bumpy the Cudgelist"
+     tags        "brawler", "goblin brawler", "goblin"
+     location    brawler
+     details     "The goblin says ‘You can’t get past me Bumpy the Cudgelist! I’ll bump your head if you so nearly try to make your way around.’ It waves its club above its head triumphantly.\n"
+     contents    "He has"
+     health      3
+     capacity    20
+
+- goblinBrawlerDefeated
+     condition   { return goblinBrawlerUndefeated->health <= 0; }
+     description "Bumpy the Cudgelist"
+     tags        "brawler", "goblin brawler", "goblin"
+     location    brawler
+     details     "The goblin is unconcious and doesn't say anything.\n"
+     contents    "He has"
+     health      100
+     capacity    20
+
+- goblinRiddler
+     description "Lerp the Riddlemaster"
+     tags        "riddler", "goblin riddler", "goblin", "lerp"
+     location    riddler
+     details     "The goblin says ‘Hmm greetings! I an Lerp the Riddlemaster. I suppose you wish to go through that door over there. Hmm quite, quite. Well, I can open that door for you if you can solve my riddle!’/n ‘I have lots to say but never speak,’/n ‘I open but you cannot walk through me,’/n ‘I have a spine but no bones.’/n ‘What am I?’\n"
+     contents    "He has"
+     health      100
+     capacity    20
+
+- goblinGuardUndefeated
+     condition   { return goblinGuardUndefeated->health > 0; }
+     description "Royal Gobo Guard Frank"
+     tags        "guard", "goblin guard", "goblin", "frank"
+     location    guard
+     details     "The goblin does not answer…\n"
+     contents    "He has"
+     health      6
+     capacity    20
+
+- goblinGuardDefeated
+     condition { return goblinGuardDefeated->health <= 0; }
+     description "Royal Gobo Guard Frank"
+     tags        "guard", "goblin guard", "goblin", "frank"
+     location    guard
+     details     "The goblin is unconcious and does not say anything.\n"
+     contents    "He has"
+     health      100
+     capacity    20
+
+- goblinKing
+     description "King Gobo, Keeper of the Goblin Goblet"
+     tags        "king", "goblin king", "goblin"
+     location    throne
+     details     "You have passed through all of the brave adventurer. Using you might and wit, you found your way through the Goblin Gauntlet! Know you may finally take your prize. I, King Gobo, Keeper of the Goblin Goblet bestow upon you my namesake. The Goblin Goblet is yours!!!\n"
+     contents    "He has"
+     health      100
+     capacity    20
+
+
+
 
 - field
      description "an open field"
@@ -67,9 +596,9 @@ extern OBJECT objs[];
      details     "The shiny coin seems to be a rare and priceless artefact.\n"
      weight      1
 
-- guard
+- guardWithCoin
      description "a burly guard"
-     tags        "guard", "burly guard"
+     tags        "burly guard"
      location    field
      details     "The guard is a really big fellow.\n"
      contents    "He has"
@@ -79,14 +608,13 @@ extern OBJECT objs[];
 - player
      description "yourself"
      tags        "yourself"
-     location    field
+     location    entrance
      details     "You would need a mirror to look at yourself.\n"
      contents    "You have"
      health      100
      capacity    20
 
 - intoCave
-     condition   { return guard->health == 0 || silver->location == guard; }
      description "a cave entrance to the east"
      tags        "east", "entrance"
      location    field

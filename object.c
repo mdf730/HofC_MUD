@@ -2,40 +2,114 @@
 #include "object.h"
 #include "toggle.h"
 static const char *tags0[] = { "entrance", NULL};
-static const char *tags1[] = { "fountain", NULL};
-static const char *tags2[] = { "trader", NULL};
-static const char *tags3[] = { "field", NULL};
-static const char *tags4[] = { "cave", NULL};
-static const char *tags5[] = { "silver", "coin", "silver coin", NULL};
-static const char *tags6[] = { "gold", "coin", "gold coin", NULL};
-static const char *tags7[] = { "guard", "burly guard", NULL};
-static const char *tags8[] = { "yourself", NULL};
-static bool condition9(void)  { return guard->health == 0 || silver->location == guard; }
-static const char *tags9[] = { "east", "entrance", NULL};
-static bool condition10(void)  { return guard->health > 0 && silver->location != guard; }
-static const char *tags10[] = { "east", "entrance", NULL};
-static const char *tags11[] = { "west", "out", NULL};
-static const char *tags12[] = { "west", "north", "south", "forest", NULL};
-static const char *tags13[] = { "east", "north", "rock", NULL};
-static const char *tags14[] = { "backroom", NULL};
-static const char *tags15[] = { "east", "west", "south", "rock", NULL};
-static const char *tags16[] = { "south", "door", "doorway", NULL};
-static const char *tags17[] = { "south", "door", "doorway", NULL};
-static const char *tags18[] = { "north", "door", "doorway", NULL};
-static const char *tags19[] = { "north", "door", "doorway", NULL};
-static const char *tags20[] = { "box", "wooden box", NULL};
-static const char *tags21[] = { "box", "wooden box", NULL};
-static const char *tags22[] = { "box", "wooden box", NULL};
-static const char *tags23[] = { "key", "tiny key", NULL};
-static const char *tags24[] = { "lamp", NULL};
-static const char *tags25[] = { "lamp", NULL};
+static const char *tags1[] = { "north", "south", "field", NULL};
+static const char *tags2[] = { "east", "door", "doorway", "cliffside", NULL};
+static const char *tags3[] = { "west", "path", "village", NULL};
+static const char *tags4[] = { "village", NULL};
+static const char *tags5[] = { "north", "south", "east", NULL};
+static const char *tags6[] = { "west", NULL};
+static const char *tags7[] = { "fountainRoom", NULL};
+static const char *tags8[] = { "south", NULL};
+static const char *tags9[] = { "west", NULL};
+static const char *tags10[] = { "east", NULL};
+static bool condition11(void)  { return polishedKey->location == player; }
+static const char *tags11[] = { "north", NULL};
+static bool condition12(void)  { return polishedKey->location != player; }
+static const char *tags12[] = { "north", NULL};
+static const char *tags13[] = { "fountain", "goblin fountain", NULL};
+static const char *tags14[] = { "gold", "coin", "gold coin", NULL};
+static const char *tags15[] = { "trader", NULL};
+static const char *tags16[] = { "mat", "rug", "colorful mat", NULL};
+static const char *tags17[] = { "north", "east", NULL};
+static const char *tags18[] = { "west", NULL};
+static bool condition19(void)  { return traderToSecretBlocked->health <= 0; }
+static const char *tags19[] = { "south", NULL};
+static bool condition20(void)  { return traderToSecretBlocked->health > 0; }
+static const char *tags20[] = { "south", NULL};
+static const char *tags21[] = { "secret", NULL};
+static const char *tags22[] = { "south", "east", "west", NULL};
+static const char *tags23[] = { "north", NULL};
+static const char *tags24[] = { "pit", NULL};
+static const char *tags25[] = { "west", NULL};
+static const char *tags26[] = { "south", NULL};
+static const char *tags27[] = { "east", NULL};
+static const char *tags28[] = { "north", NULL};
+static const char *tags29[] = { "brawler", NULL};
+static const char *tags30[] = { "club", "leg", "table leg", NULL};
+static const char *tags31[] = { "debris", "trash", "rubbish", "wood", NULL};
+static const char *tags32[] = { "north", "west", NULL};
+static const char *tags33[] = { "south", NULL};
+static const char *tags34[] = { "east", NULL};
+static const char *tags35[] = { "key room", NULL};
+static const char *tags36[] = { "key", "blue key", NULL};
+static const char *tags37[] = { "south", "east", "north", NULL};
+static const char *tags38[] = { "west", NULL};
+static const char *tags39[] = { "riddler", NULL};
+static const char *tags40[] = { "south", "north", NULL};
+static const char *tags41[] = { "west", NULL};
+static const char *tags42[] = { "east", NULL};
+static const char *tags43[] = { "gallery", NULL};
+static const char *tags44[] = { "east", NULL};
+static const char *tags45[] = { "north", NULL};
+static const char *tags46[] = { "south", NULL};
+static const char *tags47[] = { "west", NULL};
+static const char *tags48[] = { "store", NULL};
+static const char *tags49[] = { "scroll", "unfurled scroll", NULL};
+static const char *tags50[] = { "north", "east", "west", NULL};
+static const char *tags51[] = { "south", NULL};
+static const char *tags52[] = { "guard", NULL};
+static const char *tags53[] = { "south", "west", NULL};
+static const char *tags54[] = { "north", NULL};
+static const char *tags55[] = { "east", NULL};
+static const char *tags56[] = { "throne", NULL};
+static const char *tags57[] = { "north", "south", "east", NULL};
+static const char *tags58[] = { "west", NULL};
+static bool condition59(void)  { return coin->location == objectFountain || coin->location == player; }
+static const char *tags59[] = { "trader", "goblin trader", "goblin", NULL};
+static const char *tags60[] = { "key", "polished key", NULL};
+static bool condition61(void)  { return coin->location != objectFountain && coin->location != player; }
+static const char *tags61[] = { "trader", "goblin trader", "goblin", NULL};
+static bool condition62(void)  { return goblinBrawlerUndefeated->health > 0; }
+static const char *tags62[] = { "brawler", "goblin brawler", "goblin", NULL};
+static bool condition63(void)  { return goblinBrawlerUndefeated->health <= 0; }
+static const char *tags63[] = { "brawler", "goblin brawler", "goblin", NULL};
+static const char *tags64[] = { "riddler", "goblin riddler", "goblin", "lerp", NULL};
+static bool condition65(void)  { return goblinGuardUndefeated->health > 0; }
+static const char *tags65[] = { "guard", "goblin guard", "goblin", "frank", NULL};
+static bool condition66(void)  { return goblinGuardDefeated->health <= 0; }
+static const char *tags66[] = { "guard", "goblin guard", "goblin", "frank", NULL};
+static const char *tags67[] = { "king", "goblin king", "goblin", NULL};
+static const char *tags68[] = { "field", NULL};
+static const char *tags69[] = { "cave", NULL};
+static const char *tags70[] = { "silver", "coin", "silver coin", NULL};
+static const char *tags71[] = { "gold", "coin", "gold coin", NULL};
+static const char *tags72[] = { "burly guard", NULL};
+static const char *tags73[] = { "yourself", NULL};
+static const char *tags74[] = { "east", "entrance", NULL};
+static bool condition75(void)  { return guard->health > 0 && silver->location != guard; }
+static const char *tags75[] = { "east", "entrance", NULL};
+static const char *tags76[] = { "west", "out", NULL};
+static const char *tags77[] = { "west", "north", "south", "forest", NULL};
+static const char *tags78[] = { "east", "north", "rock", NULL};
+static const char *tags79[] = { "backroom", NULL};
+static const char *tags80[] = { "east", "west", "south", "rock", NULL};
+static const char *tags81[] = { "south", "door", "doorway", NULL};
+static const char *tags82[] = { "south", "door", "doorway", NULL};
+static const char *tags83[] = { "north", "door", "doorway", NULL};
+static const char *tags84[] = { "north", "door", "doorway", NULL};
+static const char *tags85[] = { "box", "wooden box", NULL};
+static const char *tags86[] = { "box", "wooden box", NULL};
+static const char *tags87[] = { "box", "wooden box", NULL};
+static const char *tags88[] = { "key", "tiny key", NULL};
+static const char *tags89[] = { "lamp", NULL};
+static const char *tags90[] = { "lamp", NULL};
 
 static bool alwaysTrue(void) { return true; }
 
 OBJECT objs[] = {
 	{	/* 0 = entrance */
 		alwaysTrue,
-		 "An entrance",
+		 "Entrance",
 		tags0,
 		NULL,
 		NULL,
@@ -51,10 +125,118 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 1 = fountain */
+	{	/* 1 = wallEntrance */
 		alwaysTrue,
-		 "A fountain is in the center of the room",
+		 "a lush field",
 		tags1,
+		 entrance,
+		 entrance,
+		 entrance,
+		 "A field spreads as far as you can see.\n",
+		"You see",
+		 "You stare off into the distance at the field, but remain where you are.\n",
+		99,
+		0,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 2 = intoFountain */
+		alwaysTrue,
+		 "a stone doorway to the east",
+		tags2,
+		 entrance,
+		 fountainRoom,
+		 fountainRoom,
+		 "Vines crawl across the aged rock and water trickles down the jagged precipice and forms pool at its feet.\n",
+		"You see",
+		 "You walk through the doorway.\n",
+		99,
+		0,
+		0,
+		 isAlreadyOpen,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 3 = intoVillage */
+		alwaysTrue,
+		 "a road to your west",
+		tags3,
+		 entrance,
+		 village,
+		 village,
+		 "To your West is the road back to the village, spanning across a lush green field.\n",
+		"You see",
+		 "You walk down the winding road back home.\n",
+		99,
+		0,
+		0,
+		 isAlreadyOpen,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 4 = village */
+		alwaysTrue,
+		 "Village",
+		tags4,
+		NULL,
+		NULL,
+		NULL,
+		 "No adventerous spirit in you, eh? How can you win the game you don't attempt?\n",
+		"You see",
+		"You can't get much closer than this.\n",
+		99,
+		 9999,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 5 = wallVillage */
+		alwaysTrue,
+		 "a lively village",
+		tags5,
+		 village,
+		 village,
+		 village,
+		 "You see many familiar faces as you explore the village.\n",
+		"You see",
+		 "You make your way through the village.\n",
+		99,
+		0,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 6 = villageToEntrance */
+		alwaysTrue,
+		 "path to entrance",
+		tags6,
+		 village,
+		 entrance,
+		 entrance,
+		 "A path leads to the entrance.\n",
+		"You see",
+		 "You walk back down the path.\n",
+		99,
+		0,
+		0,
+		 isAlreadyOpen,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 7 = fountainRoom */
+		alwaysTrue,
+		 "Fountain Room",
+		tags7,
 		NULL,
 		NULL,
 		NULL,
@@ -69,10 +251,136 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 2 = trader */
+	{	/* 8 = wallFountain */
 		alwaysTrue,
-		 "a trader",
-		tags2,
+		NULL,
+		tags8,
+		 fountainRoom,
+		 fountainRoom,
+		 fountainRoom,
+		 "A nondescript wall on the south end of the room.\n",
+		"You see",
+		 "You run into the wall, receiving a bruise on your chin for the effort. This isn't Hogwarts...\n",
+		99,
+		0,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 9 = intoEntrance */
+		alwaysTrue,
+		 "a stone doorway to the west",
+		tags9,
+		 fountainRoom,
+		 entrance,
+		 entrance,
+		 "A weathered stone doorway attached to the cliffside\n",
+		"You see",
+		 "You walk through the doorway.\n",
+		99,
+		0,
+		0,
+		 isAlreadyOpen,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 10 = intoTrader */
+		alwaysTrue,
+		 "a wooden doorway to the east",
+		tags10,
+		 fountainRoom,
+		 trader,
+		 trader,
+		 "A wooden doorway is slightly ajar. A warm light filters in through the crack.\n",
+		"You see",
+		 "You walk through the doorway.\n",
+		99,
+		0,
+		0,
+		 isAlreadyOpen,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 11 = intoPit */
+		condition11,
+		 "an unlocked doorway to the north",
+		tags11,
+		 fountainRoom,
+		 pit,
+		 pit,
+		 "A wooden doorway is closed. A lock, now open, gleams under the door's handle.\n",
+		"You see",
+		 "You walk through the doorway.\n",
+		99,
+		0,
+		0,
+		 isAlreadyOpen,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 12 = intoPitBlocked */
+		condition12,
+		 "a locked doorway to the north",
+		tags12,
+		 fountainRoom,
+		NULL,
+		 pit,
+		 "A wooden doorway is closed. A lock gleams under the door's handle.\n",
+		"You see",
+		 "The lock rattles. You can't break through.\n",
+		99,
+		0,
+		0,
+		 isAlreadyOpen,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 13 = objectFountain */
+		alwaysTrue,
+		 "a fountain",
+		tags13,
+		 fountainRoom,
+		NULL,
+		NULL,
+		 "The water is clear and pristine, the bottom of the fountain is a gravel pattern. At the bottom of the fountain you see something glimmer. It’s a gold coin! It twinkles as the water moves about the surface, refracting the light over it.\n",
+		"You see",
+		"You can't get much closer than this.\n",
+		 100,
+		0,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 14 = coin */
+		alwaysTrue,
+		 "a gold coin",
+		tags14,
+		 objectFountain,
+		NULL,
+		NULL,
+		 "The shiny coin glimmers with a distinct glint.\n",
+		"You see",
+		"You can't get much closer than this.\n",
+		 1,
+		0,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 15 = trader */
+		alwaysTrue,
+		 "Trader Room",
+		tags15,
 		NULL,
 		NULL,
 		NULL,
@@ -87,10 +395,946 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 3 = field */
+	{	/* 16 = mat */
+		alwaysTrue,
+		 "a colorful mat",
+		tags16,
+		 trader,
+		NULL,
+		NULL,
+		 "Spread across the mat in careful tidy rows are various objects, such as smoothed glass, bent silverware, and a single polished key. The goblin guards over the objects closely, preventing them from being taken.\n",
+		"You see",
+		"You can't get much closer than this.\n",
+		 9999,
+		0,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 17 = traderWall */
+		alwaysTrue,
+		NULL,
+		tags17,
+		 trader,
+		 trader,
+		 trader,
+		 "The wall is dirty. Upon closer inspection, the wall is very dirty.\n",
+		"You see",
+		 "You can't walk through a solid wall...\n",
+		99,
+		0,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 18 = traderToFountain */
+		alwaysTrue,
+		 "a wooden doorway to the west",
+		tags18,
+		 trader,
+		 fountainRoom,
+		 fountainRoom,
+		 "A wooden doorway is ajar. It leads back to the fountain room.\n",
+		"You see",
+		 "You walk through the doorway.\n",
+		99,
+		0,
+		0,
+		 isAlreadyOpen,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 19 = traderToSecret */
+		condition19,
+		 "a hole in the wall to the south",
+		tags19,
+		 trader,
+		 secret,
+		 secret,
+		 "The wall has been broken through, showing a hidden room that lays beyond.\n",
+		"You see",
+		 "You walk through the debris.\n",
+		99,
+		0,
+		0,
+		 isAlreadyOpen,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 20 = traderToSecretBlocked */
+		condition20,
+		 "a mysteriously colored wall to the south",
+		tags20,
+		 trader,
+		NULL,
+		 secret,
+		 "The wall is mysteriously colored, and a few bricks appear out of place.\n",
+		"You see",
+		 "You push on the bricks and they move ever so slightly, but not enough to walk through.\n",
+		99,
+		0,
+		 1,
+		 isAlreadyOpen,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 21 = secret */
+		alwaysTrue,
+		 "Secret Room",
+		tags21,
+		NULL,
+		NULL,
+		NULL,
+		 "The room is covered with ornate flowery wallpaper of blues, greens, and gold. A neon sign flashes in yellow on the opposite end of the room, it reads ‘You found the secret!’ There is a wooden door to your North.\n",
+		"You see",
+		"You can't get much closer than this.\n",
+		99,
+		 9999,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 22 = wallSecret */
+		alwaysTrue,
+		NULL,
+		tags22,
+		 secret,
+		 secret,
+		 secret,
+		 "The whole room sparkles, even the wall.\n",
+		"You see",
+		 "Nope. There's only one false wall in this game.\n",
+		99,
+		0,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 23 = secretToTrader */
+		alwaysTrue,
+		 "wall to trader",
+		tags23,
+		 secret,
+		 trader,
+		 trader,
+		 "You've already broken through the wall, which leads back to the trader room.\n",
+		"You see",
+		 "You walk through the debris.\n",
+		99,
+		0,
+		0,
+		 isAlreadyOpen,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 24 = pit */
+		alwaysTrue,
+		 "The Pit",
+		tags24,
+		NULL,
+		NULL,
+		NULL,
+		 "The huge room expands out in front of you, in the center a round pit descends into an inky blackness. The pits diameter almost meets the sides of the room itself, but leaves enough space to allow passage around the edges. Sitting on the pits edge is a goblin, its feet dangling over. The goblin doesn’t take any notice of you but instead peers downward with a cheery smile on its face, moving its legs like pendulums. There are wooden doors to your North, East and South.\n",
+		"You see",
+		"You can't get much closer than this.\n",
+		99,
+		 9999,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 25 = wallPit */
+		alwaysTrue,
+		NULL,
+		tags25,
+		 pit,
+		 pit,
+		 pit,
+		 "The edge of the pit makes it impossible to reach this side of the room.\n",
+		"You see",
+		 "As you try to move west, you fall into the pit. It takes several grueling hours to make your way out.\n",
+		99,
+		0,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 26 = pitToFountain */
+		alwaysTrue,
+		 "a wooden doorway to the south",
+		tags26,
+		 pit,
+		 fountainRoom,
+		 fountainRoom,
+		 "A wooden doorway is closed. A lock gleams under the door's handle.\n",
+		"You see",
+		 "You walk through the doorway.\n",
+		99,
+		0,
+		0,
+		 isAlreadyOpen,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 27 = pitToRiddler */
+		alwaysTrue,
+		 "a wooden doorway to the east",
+		tags27,
+		 pit,
+		 riddler,
+		 riddler,
+		 "A wooden doorway is closed. A lock gleams under the door's handle.\n",
+		"You see",
+		 "You walk through the doorway.\n",
+		99,
+		0,
+		0,
+		 isAlreadyOpen,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 28 = pitToBrawler */
+		alwaysTrue,
+		 "a wooden doorway to the north",
+		tags28,
+		 pit,
+		 brawler,
+		 brawler,
+		 "A wooden doorway is closed. A lock gleams under the door's handle.\n",
+		"You see",
+		 "You walk through the doorway.\n",
+		99,
+		0,
+		0,
+		 isAlreadyOpen,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 29 = brawler */
+		alwaysTrue,
+		 "The Brawler",
+		tags29,
+		NULL,
+		NULL,
+		NULL,
+		 "The room is very messy, the ground covered with bits of fractured wooden debri and other rubbish. To the East is a wooden door with the large picture of a key carved on it. Standing between you and the door is a goblin, it has wild eyes and brandishes a club. Every move you make it reacts to as to remain between you and the key door. There are wooden doors to your South and East.\n",
+		"You see",
+		"You can't get much closer than this.\n",
+		99,
+		 9999,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 30 = club */
+		alwaysTrue,
+		 "a table leg",
+		tags30,
+		 brawler,
+		NULL,
+		NULL,
+		 "The table leg looks like it would make a strudy club.\n",
+		"You see",
+		"You can't get much closer than this.\n",
+		 1,
+		0,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 31 = debris */
+		alwaysTrue,
+		 "a lot of junk",
+		tags31,
+		 brawler,
+		NULL,
+		NULL,
+		 "Looking at the broken wood and other rubbish you see a table leg broken into the rough shape of a club. Nothing else looks particularly useful.\n",
+		"You see",
+		"You can't get much closer than this.\n",
+		 100,
+		0,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 32 = wallBrawler */
+		alwaysTrue,
+		NULL,
+		tags32,
+		 brawler,
+		 brawler,
+		 brawler,
+		 "The walls have a stench, as if they haven't been cleaned in years.\n",
+		"You see",
+		 "You run your finger along the wall. When you pull away, a residue stays on your hand, making it sticky.\n",
+		99,
+		0,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 33 = brawlerToPit */
+		alwaysTrue,
+		 "a wooden doorway to the south",
+		tags33,
+		 brawler,
+		 pit,
+		 pit,
+		 "The wooden doorway leads back to the pit.\n",
+		"You see",
+		 "You walk through the doorway.\n",
+		99,
+		0,
+		0,
+		 isAlreadyOpen,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 34 = brawlerToKey */
+		alwaysTrue,
+		 "a door to the key room",
+		tags34,
+		 brawler,
+		 key,
+		 key,
+		 "A wooden doorway is closed. A lock gleams under the door's handle.\n",
+		"You see",
+		 "You walk through the doorway.\n",
+		99,
+		0,
+		0,
+		 isAlreadyOpen,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 35 = key */
+		alwaysTrue,
+		 "Key Room",
+		tags35,
+		NULL,
+		NULL,
+		NULL,
+		 "The room is small and made of red brick with mortar. On the wall hanging from a rusty coat hook is a single blue key. There is a wooden door to your West.\n",
+		"You see",
+		"You can't get much closer than this.\n",
+		99,
+		 9999,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 36 = blueKey */
+		alwaysTrue,
+		 "a blue key",
+		tags36,
+		 key,
+		NULL,
+		NULL,
+		 "The key is a strange blue color.\n",
+		"You see",
+		"You can't get much closer than this.\n",
+		 1,
+		0,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 37 = wallKey */
+		alwaysTrue,
+		NULL,
+		tags37,
+		 key,
+		 key,
+		 key,
+		 "The walls are hidden away in shadow.\n",
+		"You see",
+		 "It's too dark to go that way.\n",
+		99,
+		0,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 38 = keyToBrawler */
+		alwaysTrue,
+		 "a door to the brawler room",
+		tags38,
+		 key,
+		 brawler,
+		 brawler,
+		 "A wooden doorway is closed. A lock gleams under the door's handle.\n",
+		"You see",
+		 "You walk through the doorway.\n",
+		99,
+		0,
+		0,
+		 isAlreadyOpen,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 39 = riddler */
+		alwaysTrue,
+		 "The Riddler's Room",
+		tags39,
+		NULL,
+		NULL,
+		NULL,
+		 "The long room is lit with lanterns on either sides of the walls, lavender colored wallpaper peels in flakes onto the floor. On the left side sits a goblin upon a wooden stool with a stack of books to its side. The goblin leafs through leather bound tome absentmindedly, only looking up for a second to acknowledge your presence. There are wooden doors to your East and West.\n",
+		"You see",
+		"You can't get much closer than this.\n",
+		99,
+		 9999,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 40 = wallRiddler */
+		alwaysTrue,
+		NULL,
+		tags40,
+		 riddler,
+		 riddler,
+		 riddler,
+		 "There are lanterns on the wall, illuminating wallpaper that is peeling terribly.\n",
+		"You see",
+		 "You get to close to the wall and nearly set your hair on fire from one of the lanterns.\n",
+		99,
+		0,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 41 = riddlerToPit */
+		alwaysTrue,
+		 "a wooden doorway to the west",
+		tags41,
+		 riddler,
+		 pit,
+		 pit,
+		 "A wooden doorway.\n",
+		"You see",
+		 "You walk through the doorway.\n",
+		99,
+		0,
+		0,
+		 isAlreadyOpen,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 42 = riddlerToGallery */
+		alwaysTrue,
+		 "a wooden doorway to the east",
+		tags42,
+		 riddler,
+		 gallery,
+		 gallery,
+		 "A wooden doorway.\n",
+		"You see",
+		 "You walk through the doorway.\n",
+		99,
+		0,
+		0,
+		 isAlreadyOpen,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 43 = gallery */
+		alwaysTrue,
+		 "Gallery",
+		tags43,
+		NULL,
+		NULL,
+		NULL,
+		 "The long room stretches to your left and right, rose colored wallpaper peels in flakes onto the floor. Red curtains sway on either corner of the room though they seem to stop moving when you look straight at them. On the edge of the wall are three busts, the first of a goblin with its long nose pointed up, the second with its nose pointing straight ahead, and the third with its nose point down. The busts stand on pedestals and below them are square wooden buttons. There are wooden doors to your West, North, and South.\n",
+		"You see",
+		"You can't get much closer than this.\n",
+		99,
+		 9999,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 44 = wallGallery */
+		alwaysTrue,
+		NULL,
+		tags44,
+		 gallery,
+		 gallery,
+		 gallery,
+		 "There are three busts along the wall.\n",
+		"You see",
+		 "There's nowhere to go!\n",
+		99,
+		0,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 45 = galleryToStore */
+		alwaysTrue,
+		 "a wooden doorway to the north",
+		tags45,
+		 gallery,
+		 store,
+		 store,
+		 "A wooden doorway.\n",
+		"You see",
+		 "You walk through the doorway.\n",
+		99,
+		0,
+		0,
+		 isAlreadyOpen,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 46 = galleryToGuard */
+		alwaysTrue,
+		 "a wooden doorway to the south",
+		tags46,
+		 gallery,
+		 guard,
+		 guard,
+		 "A wooden doorway.\n",
+		"You see",
+		 "You walk through the doorway.\n",
+		99,
+		0,
+		0,
+		 isAlreadyOpen,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 47 = galleryToRiddler */
+		alwaysTrue,
+		 "a wooden doorway to the west",
+		tags47,
+		 gallery,
+		 riddler,
+		 riddler,
+		 "A wooden doorway.\n",
+		"You see",
+		 "You walk through the doorway.\n",
+		99,
+		0,
+		0,
+		 isAlreadyOpen,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 48 = store */
+		alwaysTrue,
+		 "Storeroom",
+		tags48,
+		NULL,
+		NULL,
+		NULL,
+		 "The small room is almost filled to the brim with barrels and crates. A dim lamp on the ceiling only barely makes the room visible. On one of the crates sits an unfurled scroll nailed to the crates frame; it has writing on it. There is a wooden door to your South.\n",
+		"You see",
+		"You can't get much closer than this.\n",
+		99,
+		 9999,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 49 = scroll */
+		alwaysTrue,
+		 "an unfurled scroll",
+		tags49,
+		 store,
+		NULL,
+		NULL,
+		 "The scroll reads ‘Down the road three goblins strolled, moving on their way. One looked up and said to them ‘Looks like rain today.’ The other looked down and commented ‘The grounds all muddy and gray.’ The last looked forward swiftly said ‘Then quite quickly we should be on our way.’",
+		"You see",
+		"You can't get much closer than this.\n",
+		 9999,
+		0,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 50 = wallStore */
+		alwaysTrue,
+		NULL,
+		tags50,
+		 store,
+		 store,
+		 store,
+		 "There are cobwebs on the dusty walls.\n",
+		"You see",
+		 "You really don't want to touch the cobwebs on the walls.\n",
+		99,
+		0,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 51 = storeToGallery */
+		alwaysTrue,
+		 "a wooden doorway to the south",
+		tags51,
+		 store,
+		 gallery,
+		 gallery,
+		 "A wooden doorway.\n",
+		"You see",
+		 "You walk through the doorway.\n",
+		99,
+		0,
+		0,
+		 isAlreadyOpen,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 52 = guard */
+		alwaysTrue,
+		 "Guard Room",
+		tags52,
+		NULL,
+		NULL,
+		NULL,
+		 "The room is well lit and covered with ornate silver wallpaper. To your East is a golden door with a cup image engraved on it. Between you and the golden door stands a goblin wearing armor, it holds a steel mace to its side. The goblins eyes are stern and its stance is disciplined. There is a wooden door to your North and a golden door to your East.\n",
+		"You see",
+		"You can't get much closer than this.\n",
+		99,
+		 9999,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 53 = wallGuard */
+		alwaysTrue,
+		NULL,
+		tags53,
+		 guard,
+		 guard,
+		 guard,
+		 "There is nothing interesting on this wall.\n",
+		"You see",
+		 "Why even try at this point?\n",
+		99,
+		0,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 54 = guardToGallery */
+		alwaysTrue,
+		 "a wooden doorway to the north",
+		tags54,
+		 guard,
+		 gallery,
+		 gallery,
+		 "A wooden doorway.\n",
+		"You see",
+		 "You walk through the doorway.\n",
+		99,
+		0,
+		0,
+		 isAlreadyOpen,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 55 = guardToThrone */
+		alwaysTrue,
+		 "a wooden doorway to the east",
+		tags55,
+		 guard,
+		 throne,
+		 throne,
+		 "A wooden doorway.\n",
+		"You see",
+		 "You walk through the doorway.\n",
+		99,
+		0,
+		0,
+		 isAlreadyOpen,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 56 = throne */
+		alwaysTrue,
+		 "The Throne Room",
+		tags56,
+		NULL,
+		NULL,
+		NULL,
+		 "The room glimmers with jewels and fine tapestries of red and violet. Sitting on a gold throne is a goblin wearing a crown and draped in ornate robes. It holds the Goblin Goblet in its hands in front of you.\n",
+		"You see",
+		"You can't get much closer than this.\n",
+		99,
+		 9999,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 57 = wallThrone */
+		alwaysTrue,
+		NULL,
+		tags57,
+		 throne,
+		 throne,
+		 throne,
+		 "The wall is covered in tapestries of red and violet.\n",
+		"You see",
+		 "You play in the tapestry for a bit before returning to the center of the throne room.\n",
+		99,
+		0,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 58 = throneToGuard */
+		alwaysTrue,
+		 "a wooden doorway to the west",
+		tags58,
+		 throne,
+		 guard,
+		 guard,
+		 "A wooden doorway.\n",
+		"You see",
+		 "You walk through the doorway.\n",
+		99,
+		0,
+		0,
+		 isAlreadyOpen,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 59 = goblinTraderNoCoin */
+		condition59,
+		 "Bub the Trader of Shinies",
+		tags59,
+		 trader,
+		NULL,
+		NULL,
+		 "The goblin says ‘Oh hello! I am Bub the Trader of Shiny’s. I do so love shiny things, but not all shinies things are equal to me, oh no. If I had to choose to between one shiny and a shinier shiny, I’d take the shinier shiny! Find me shinier shiny and I’ll give you a less shiny shiny.’\n",
+		 "He has",
+		"You can't get much closer than this.\n",
+		99,
+		 20,
+		 100,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 60 = polishedKey */
+		alwaysTrue,
+		 "a polished key",
+		tags60,
+		 goblinTraderNoCoin,
+		NULL,
+		NULL,
+		 "The key is polished and has a dull glint.\n",
+		"You see",
+		"You can't get much closer than this.\n",
+		 1,
+		0,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 61 = goblinTraderHasCoin */
+		condition61,
+		 "Bub the Trader of Shinies",
+		tags61,
+		 trader,
+		NULL,
+		NULL,
+		 "The goblin say’s ‘Oh yes! This is very shiny shiny! Here, you have have this less shiny shiny in return.’ The Goblin hands you a polished key.\n",
+		 "He has",
+		"You can't get much closer than this.\n",
+		99,
+		 20,
+		 100,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 62 = goblinBrawlerUndefeated */
+		condition62,
+		 "Bumpy the Cudgelist",
+		tags62,
+		 brawler,
+		NULL,
+		NULL,
+		 "The goblin says ‘You can’t get past me Bumpy the Cudgelist! I’ll bump your head if you so nearly try to make your way around.’ It waves its club above its head triumphantly.\n",
+		 "He has",
+		"You can't get much closer than this.\n",
+		99,
+		 20,
+		 3,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 63 = goblinBrawlerDefeated */
+		condition63,
+		 "Bumpy the Cudgelist",
+		tags63,
+		 brawler,
+		NULL,
+		NULL,
+		 "The goblin is unconcious and doesn't say anything.\n",
+		 "He has",
+		"You can't get much closer than this.\n",
+		99,
+		 20,
+		 100,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 64 = goblinRiddler */
+		alwaysTrue,
+		 "Lerp the Riddlemaster",
+		tags64,
+		 riddler,
+		NULL,
+		NULL,
+		 "The goblin says ‘Hmm greetings! I an Lerp the Riddlemaster. I suppose you wish to go through that door over there. Hmm quite, quite. Well, I can open that door for you if you can solve my riddle!’/n ‘I have lots to say but never speak,’/n ‘I open but you cannot walk through me,’/n ‘I have a spine but no bones.’/n ‘What am I?’\n",
+		 "He has",
+		"You can't get much closer than this.\n",
+		99,
+		 20,
+		 100,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 65 = goblinGuardUndefeated */
+		condition65,
+		 "Royal Gobo Guard Frank",
+		tags65,
+		 guard,
+		NULL,
+		NULL,
+		 "The goblin does not answer…\n",
+		 "He has",
+		"You can't get much closer than this.\n",
+		99,
+		 20,
+		 6,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 66 = goblinGuardDefeated */
+		condition66,
+		 "Royal Gobo Guard Frank",
+		tags66,
+		 guard,
+		NULL,
+		NULL,
+		 "The goblin is unconcious and does not say anything.\n",
+		 "He has",
+		"You can't get much closer than this.\n",
+		99,
+		 20,
+		 100,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 67 = goblinKing */
+		alwaysTrue,
+		 "King Gobo, Keeper of the Goblin Goblet",
+		tags67,
+		 throne,
+		NULL,
+		NULL,
+		 "You have passed through all of the brave adventurer. Using you might and wit, you found your way through the Goblin Gauntlet! Know you may finally take your prize. I, King Gobo, Keeper of the Goblin Goblet bestow upon you my namesake. The Goblin Goblet is yours!!!\n",
+		 "He has",
+		"You can't get much closer than this.\n",
+		99,
+		 20,
+		 100,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 68 = field */
 		alwaysTrue,
 		 "an open field",
-		tags3,
+		tags68,
 		NULL,
 		NULL,
 		NULL,
@@ -105,10 +1349,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 4 = cave */
+	{	/* 69 = cave */
 		alwaysTrue,
 		 "a little cave",
-		tags4,
+		tags69,
 		NULL,
 		NULL,
 		NULL,
@@ -123,10 +1367,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 5 = silver */
+	{	/* 70 = silver */
 		alwaysTrue,
 		 "a silver coin",
-		tags5,
+		tags70,
 		 field,
 		NULL,
 		NULL,
@@ -141,10 +1385,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 6 = gold */
+	{	/* 71 = gold */
 		alwaysTrue,
 		 "a gold coin",
-		tags6,
+		tags71,
 		 openBox,
 		NULL,
 		NULL,
@@ -159,10 +1403,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 7 = guard */
+	{	/* 72 = guardWithCoin */
 		alwaysTrue,
 		 "a burly guard",
-		tags7,
+		tags72,
 		 field,
 		NULL,
 		NULL,
@@ -177,11 +1421,11 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 8 = player */
+	{	/* 73 = player */
 		alwaysTrue,
 		 "yourself",
-		tags8,
-		 field,
+		tags73,
+		 entrance,
 		NULL,
 		NULL,
 		 "You would need a mirror to look at yourself.\n",
@@ -195,10 +1439,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 9 = intoCave */
-		condition9,
+	{	/* 74 = intoCave */
+		alwaysTrue,
 		 "a cave entrance to the east",
-		tags9,
+		tags74,
 		 field,
 		 cave,
 		 cave,
@@ -213,10 +1457,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 10 = intoCaveBlocked */
-		condition10,
+	{	/* 75 = intoCaveBlocked */
+		condition75,
 		 "a cave entrance to the east",
-		tags10,
+		tags75,
 		 field,
 		NULL,
 		 cave,
@@ -231,10 +1475,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 11 = exitCave */
+	{	/* 76 = exitCave */
 		alwaysTrue,
 		 "a way out to the west",
-		tags11,
+		tags76,
 		 cave,
 		 field,
 		 field,
@@ -249,10 +1493,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 12 = wallField */
+	{	/* 77 = wallField */
 		alwaysTrue,
 		 "dense forest all around",
-		tags12,
+		tags77,
 		 field,
 		NULL,
 		NULL,
@@ -267,10 +1511,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 13 = wallCave */
+	{	/* 78 = wallCave */
 		alwaysTrue,
 		 "solid rock all around",
-		tags13,
+		tags78,
 		 cave,
 		NULL,
 		NULL,
@@ -285,10 +1529,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 14 = backroom */
+	{	/* 79 = backroom */
 		alwaysTrue,
 		 "a backroom",
-		tags14,
+		tags79,
 		NULL,
 		NULL,
 		NULL,
@@ -303,10 +1547,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 15 = wallBackroom */
+	{	/* 80 = wallBackroom */
 		alwaysTrue,
 		 "solid rock all around",
-		tags15,
+		tags80,
 		 backroom,
 		NULL,
 		NULL,
@@ -321,10 +1565,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 16 = openDoorToBackroom */
+	{	/* 81 = openDoorToBackroom */
 		alwaysTrue,
 		 "an open door to the south",
-		tags16,
+		tags81,
 		NULL,
 		 backroom,
 		 backroom,
@@ -339,10 +1583,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 17 = closedDoorToBackroom */
+	{	/* 82 = closedDoorToBackroom */
 		alwaysTrue,
 		 "a closed door to the south",
-		tags17,
+		tags82,
 		 cave,
 		NULL,
 		 backroom,
@@ -357,10 +1601,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 18 = openDoorToCave */
+	{	/* 83 = openDoorToCave */
 		alwaysTrue,
 		 "an open door to the north",
-		tags18,
+		tags83,
 		NULL,
 		 cave,
 		 cave,
@@ -375,10 +1619,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 19 = closedDoorToCave */
+	{	/* 84 = closedDoorToCave */
 		alwaysTrue,
 		 "a closed door to the north",
-		tags19,
+		tags84,
 		 backroom,
 		NULL,
 		 cave,
@@ -393,10 +1637,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 20 = openBox */
+	{	/* 85 = openBox */
 		alwaysTrue,
 		 "a wooden box",
-		tags20,
+		tags85,
 		NULL,
 		NULL,
 		NULL,
@@ -411,10 +1655,10 @@ OBJECT objs[] = {
 		 isStillOpen,
 		 isAlreadyOpen
 	},
-	{	/* 21 = closedBox */
+	{	/* 86 = closedBox */
 		alwaysTrue,
 		 "a wooden box",
-		tags21,
+		tags86,
 		NULL,
 		NULL,
 		NULL,
@@ -429,10 +1673,10 @@ OBJECT objs[] = {
 		 toggleBoxLock,
 		 isAlreadyUnlocked
 	},
-	{	/* 22 = lockedBox */
+	{	/* 87 = lockedBox */
 		alwaysTrue,
 		 "a wooden box",
-		tags22,
+		tags87,
 		 backroom,
 		NULL,
 		NULL,
@@ -447,10 +1691,10 @@ OBJECT objs[] = {
 		 isAlreadyLocked,
 		 toggleBoxLock
 	},
-	{	/* 23 = keyForBox */
+	{	/* 88 = keyForBox */
 		alwaysTrue,
 		 "a tiny key",
-		tags23,
+		tags88,
 		 cave,
 		NULL,
 		NULL,
@@ -465,10 +1709,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 24 = lampOff */
+	{	/* 89 = lampOff */
 		alwaysTrue,
 		 "a lamp",
-		tags24,
+		tags89,
 		 field,
 		NULL,
 		NULL,
@@ -483,10 +1727,10 @@ OBJECT objs[] = {
 		cannotBeLocked,
 		cannotBeUnlocked
 	},
-	{	/* 25 = lampOn */
+	{	/* 90 = lampOn */
 		alwaysTrue,
 		 "a lamp",
-		tags25,
+		tags90,
 		NULL,
 		NULL,
 		NULL,

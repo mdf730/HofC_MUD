@@ -10,7 +10,7 @@ static OBJECT *getLocation(OBJECT *obj)
 
 bool isLit(OBJECT *location)
 {
-   return location == field || location == getLocation(lampOn);
+   return true;
 }
 
 OBJECT *getPassage(OBJECT *from, OBJECT *to)
@@ -62,7 +62,7 @@ int listObjectsAtLocation(OBJECT *location)
    forEachObject(obj)
    {
       if (obj != player && obj->location == location &&
-          getDistance(player, obj) < distNotHere)
+          getDistance(player, obj) < distNotHere && obj->description != NULL)
       {
          if (count++ == 0)
          {

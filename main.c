@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "parsexec.h"
+#include "object.h"
+#include "location.h"
+#include "misc.h"
 
 #define RESET          "\x1B[0m"
 #define BG           "\x1B[107m"
@@ -56,17 +59,18 @@ void clear(){
 
 int main(int argc, char *argv[])
 {
-   printf("Welcome to Little Cave Adventure.\n");
+   printf("Welcome to Let's Make A MUD.\n");
    int flag = 1;
    int move = 0;
-   int score = 0;
    clear();
-   printf(BG BLACK " MUD | LOCATION: %s | MOVES: %d | SCORE: %d \n" RESET, "Entrance", move++, score);
+   printf(BG BLACK " MUD | LOCATION: %s | MOVES: %d | HEALTH: %d \n" RESET, "Entrance", move++, player->health);
    printf("You stand in front of the infamous Goblin Gauntlet, vines crawl over the weathered stone doorway carved out of the sheer mountain cliff and a babbling brook falls across the rocks forming pools on the side of the stoneway. It is a sunny day and the chattering of birds can be heard in the distance. A green field is to your back, parted by the roadway that leads back to the safety of your village. But you are not here because it is safe, you are determined to move forward and enter the Goblin Gauntlet; your prize the artifact shrouded in mystery known as the Goblin Goblet.\n");
+   flag = parseAndExecute(input);
    while (flag){
-      flag = parseAndExecute(input) && getInput(argv[1]);
+      flag = flag && getInput(argv[1]);
       clear();
-      printf(BG BLACK " MUD | LOCATION: %s | MOVES: %d | SCORE: %d \n" RESET, "Entrance", move++, score);
+      printf(BG BLACK " MUD | LOCATION: %s | MOVES: %d | HEALTH: %d \n" RESET, player->location->description, move++, player->health);
+      flag = flag && parseAndExecute(input);
    }
    printf("\nBye!\n");
    return 0;

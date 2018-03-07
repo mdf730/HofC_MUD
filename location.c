@@ -8,7 +8,7 @@ bool executeLookAround(void)
 {
    if (isLit(player->location))
    {
-      printf("You are in %s.\n", player->location->description);
+      printf("%s.\n", player->location->details);
    }
    else
    {

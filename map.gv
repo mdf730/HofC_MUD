@@ -1,6 +1,45 @@
 digraph map {
 	node [style=filled, fillcolor=grey]
-	field [fillcolor=white]
+	entrance [fillcolor=white]
+	entrance -> entrance
+	entrance -> fountainRoom
+	entrance -> village
+	village -> village
+	village -> entrance
+	fountainRoom -> fountainRoom
+	fountainRoom -> entrance
+	fountainRoom -> trader
+	fountainRoom -> pit
+	fountainRoom -> pit [style=dashed]
+	trader -> trader
+	trader -> fountainRoom
+	trader -> secret
+	trader -> secret [style=dashed]
+	secret -> secret
+	secret -> trader
+	pit -> pit
+	pit -> fountainRoom
+	pit -> riddler
+	pit -> brawler
+	brawler -> brawler
+	brawler -> pit
+	brawler -> key
+	key -> key
+	key -> brawler
+	riddler -> riddler
+	riddler -> pit
+	riddler -> gallery
+	gallery -> gallery
+	gallery -> store
+	gallery -> guard
+	gallery -> riddler
+	store -> store
+	store -> gallery
+	guard -> guard
+	guard -> gallery
+	guard -> throne
+	throne -> throne
+	throne -> guard
 	field -> cave
 	field -> cave [style=dashed]
 	cave -> field
