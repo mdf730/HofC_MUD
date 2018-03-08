@@ -20,29 +20,29 @@ digraph map {
 	pit -> pit
 	pit -> fountainRoom
 	pit -> riddler
+	pit -> riddler [style=dashed]
 	pit -> brawler
 	brawler -> brawler
 	brawler -> pit
 	brawler -> key
+	brawler -> key [style=dashed]
 	key -> key
 	key -> brawler
 	riddler -> riddler
 	riddler -> pit
 	riddler -> gallery
+	riddler -> gallery [style=dashed]
 	gallery -> gallery
 	gallery -> store
 	gallery -> guard
+	gallery -> guard [style=dashed]
 	gallery -> riddler
 	store -> store
 	store -> gallery
 	guard -> guard
 	guard -> gallery
 	guard -> throne
+	guard -> throne [style=dashed]
 	throne -> throne
 	throne -> guard
-	field -> cave
-	field -> cave [style=dashed]
-	cave -> field
-	cave -> backroom [style=dashed]
-	backroom -> cave [style=dashed]
 }

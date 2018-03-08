@@ -1,9 +1,9 @@
-all: lilcave map.png
+all: gauntlet map.png
 
-C = object.c misc.c match.c noun.c toggle.c location.c move.c execute.c parsexec.c main.c
-H = object.h misc.h match.h noun.h toggle.h location.h move.h execute.h parsexec.h
+C = object.c misc.c match.c noun.c location.c move.c execute.c parsexec.c main.c
+H = object.h misc.h match.h noun.h location.h move.h execute.h parsexec.h
 
-lilcave: $(C) $(H)
+gauntlet: $(C) $(H)
 	gcc -Wall -Wextra $(C) -o $@
 
 object.h: object.awk object.txt

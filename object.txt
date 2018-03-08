@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "object.h"
-#include "toggle.h"
 
 typedef struct object {
    bool         (*condition)(void);
@@ -15,10 +14,6 @@ typedef struct object {
    int            weight;
    int            capacity;
    int            health;
-   const char  *(*open)(void);
-   const char  *(*close)(void);
-   const char  *(*lock)(void);
-   const char  *(*unlock)(void);
 } OBJECT;
 
 extern OBJECT objs[];
@@ -44,7 +39,6 @@ extern OBJECT objs[];
      destination fountainRoom
      details     "Vines crawl across the aged rock and water trickles down the jagged precipice and forms pool at its feet.\n"
      textGo      "You walk through the doorway.\n"
-     open        isAlreadyOpen
 
 - intoVillage
      description "a road to your west"
@@ -53,7 +47,6 @@ extern OBJECT objs[];
      destination village
      details     "To your West is the road back to the village, spanning across a lush green field.\n"
      textGo      "You walk down the winding road back home.\n"
-     open        isAlreadyOpen
 
 - village
      description "Village"
@@ -76,7 +69,6 @@ extern OBJECT objs[];
      destination entrance
      details     "A path leads to the entrance.\n"
      textGo      "You walk back down the path.\n"
-     open        isAlreadyOpen
 
 - fountainRoom
      description "Fountain Room"
@@ -98,7 +90,6 @@ extern OBJECT objs[];
      destination entrance
      details     "A weathered stone doorway attached to the cliffside\n"
      textGo      "You walk through the doorway.\n"
-     open        isAlreadyOpen
 
 - intoTrader
      description "a wooden doorway to the east"
@@ -107,7 +98,6 @@ extern OBJECT objs[];
      destination trader
      details     "A wooden doorway is slightly ajar. A warm light filters in through the crack.\n"
      textGo      "You walk through the doorway.\n"
-     open        isAlreadyOpen
 
 - intoPit
      condition   { return polishedKey->location == player; }
@@ -117,7 +107,6 @@ extern OBJECT objs[];
      destination pit
      details     "A wooden doorway is closed. A lock, now open, gleams under the door's handle.\n"
      textGo      "You walk through the doorway.\n"
-     open        isAlreadyOpen
 
 - intoPitBlocked
      condition   { return polishedKey->location != player; }
@@ -127,7 +116,6 @@ extern OBJECT objs[];
      prospect    pit
      details     "A wooden doorway is closed. A lock gleams under the door's handle.\n"
      textGo      "The lock rattles. You can't break through.\n"
-     open        isAlreadyOpen
 
 - objectFountain
      description "a fountain"
@@ -170,7 +158,6 @@ extern OBJECT objs[];
      destination fountainRoom
      details     "A wooden doorway is ajar. It leads back to the fountain room.\n"
      textGo      "You walk through the doorway.\n"
-     open        isAlreadyOpen
 
 - traderToSecret
      condition   { return traderToSecretBlocked->health <= 0; }
@@ -180,7 +167,6 @@ extern OBJECT objs[];
      destination secret
      details     "The wall has been broken through, showing a hidden room that lays beyond.\n"
      textGo      "You walk through the debris.\n"
-     open        isAlreadyOpen
 
 - traderToSecretBlocked
      condition   { return traderToSecretBlocked->health > 0; }
@@ -191,7 +177,6 @@ extern OBJECT objs[];
      details     "The wall is mysteriously colored, and a few bricks appear out of place.\n"
      textGo      "You push on the bricks and they move ever so slightly, but not enough to walk through.\n"
      health      1
-     open        isAlreadyOpen
 
 - secret
      description "Secret Room"
@@ -213,7 +198,6 @@ extern OBJECT objs[];
      destination trader
      details     "You've already broken through the wall, which leads back to the trader room.\n"
      textGo      "You walk through the debris.\n"
-     open        isAlreadyOpen
 
 - pit
      description "The Pit"
@@ -235,16 +219,24 @@ extern OBJECT objs[];
      destination fountainRoom
      details     "A wooden doorway is closed. A lock gleams under the door's handle.\n"
      textGo      "You walk through the doorway.\n"
-     open        isAlreadyOpen
 
 - pitToRiddler
-     description "a wooden doorway to the east"
+     condition   { return blueKey->location == player; }
+     description "a blue doorway to the east"
      tags        "east"
      location    pit
      destination riddler
-     details     "A wooden doorway is closed. A lock gleams under the door's handle.\n"
+     details     "The blue doorway is open. You have the key.\n"
      textGo      "You walk through the doorway.\n"
-     open        isAlreadyOpen
+
+- pitToRiddlerBlocked
+     condition   { return blueKey->location != player; }
+     description "a locked blue doorway to the east"
+     tags        "east"
+     location    pit
+     prospect    riddler
+     details     "The blue doorway is closed. A lock gleams under the door's handle.\n"
+     textGo      "You bounce off the door. Ouch.\n"
 
 - pitToBrawler
      description "a wooden doorway to the north"
@@ -253,7 +245,6 @@ extern OBJECT objs[];
      destination brawler
      details     "A wooden doorway is closed. A lock gleams under the door's handle.\n"
      textGo      "You walk through the doorway.\n"
-     open        isAlreadyOpen
 
 - brawler
      description "The Brawler"
@@ -289,16 +280,24 @@ extern OBJECT objs[];
      destination pit
      details     "The wooden doorway leads back to the pit.\n"
      textGo      "You walk through the doorway.\n"
-     open        isAlreadyOpen
 
 - brawlerToKey
+     condition   { return brawler->health <= 0; }
      description "a door to the key room"
      tags        "east"
      location    brawler
      destination key
-     details     "A wooden doorway is closed. A lock gleams under the door's handle.\n"
+     details     "The brawler is defeated, and the door is open behind him.\n"
      textGo      "You walk through the doorway.\n"
-     open        isAlreadyOpen
+
+- brawlerToKeyBlocked
+     condition   { return brawler->health > 0; }
+     description "a door to the key room"
+     tags        "east"
+     location    brawler
+     prospect    key
+     details     "You can make out any details about the door behind the brawler's looming frame.\n"
+     textGo      "The brawler swipes at you angrily. You stay where you are.\n"
 
 - key
      description "Key Room"
@@ -327,7 +326,6 @@ extern OBJECT objs[];
      destination brawler
      details     "A wooden doorway is closed. A lock gleams under the door's handle.\n"
      textGo      "You walk through the doorway.\n"
-     open        isAlreadyOpen
 
 - riddler
      description "The Riddler's Room"
@@ -349,16 +347,24 @@ extern OBJECT objs[];
      destination pit
      details     "A wooden doorway.\n"
      textGo      "You walk through the doorway.\n"
-     open        isAlreadyOpen
 
 - riddlerToGallery
+     condition   { return goblinRiddler->health <= 50; }
      description "a wooden doorway to the east"
      tags        "east"
      location    riddler
      destination gallery
      details     "A wooden doorway.\n"
      textGo      "You walk through the doorway.\n"
-     open        isAlreadyOpen
+
+- riddlerToGalleryBlocked
+     condition   { return goblinRiddler->health > 50; }
+     description "a closed doorway to the east"
+     tags        "east"
+     location    riddler
+     prospect    gallery
+     details     "A wooden doorway.\n"
+     textGo      "'Tsk, tsk,' says the riddler. 'No leaving until you answer my riddle!'.\n"
 
 - gallery
      description "Gallery"
@@ -380,16 +386,24 @@ extern OBJECT objs[];
      destination store
      details     "A wooden doorway.\n"
      textGo      "You walk through the doorway.\n"
-     open        isAlreadyOpen
 
 - galleryToGuard
-     description "a wooden doorway to the south"
+     condition   { return threeGoblins->health <= 0; }
+     description "an ornate doorway to the south"
      tags        "south"
      location    gallery
      destination guard
-     details     "A wooden doorway.\n"
+     details     "An ornate doorway.\n"
      textGo      "You walk through the doorway.\n"
-     open        isAlreadyOpen
+
+- galleryToGuardBlocked
+     condition   { return threeGoblins->health > 0; }
+     description "an ornate doorway to the south"
+     tags        "south"
+     location    gallery
+     prospect    guard
+     details     "An ornate doorway to the south is mysteriously closed.\n"
+     textGo      "You shall not pass.\n"
 
 - galleryToRiddler
      description "a wooden doorway to the west"
@@ -398,7 +412,6 @@ extern OBJECT objs[];
      destination riddler
      details     "A wooden doorway.\n"
      textGo      "You walk through the doorway.\n"
-     open        isAlreadyOpen
 
 - store
      description "Storeroom"
@@ -427,7 +440,6 @@ extern OBJECT objs[];
      destination gallery
      details     "A wooden doorway.\n"
      textGo      "You walk through the doorway.\n"
-     open        isAlreadyOpen
 
 - guard
      description "Guard Room"
@@ -449,16 +461,24 @@ extern OBJECT objs[];
      destination gallery
      details     "A wooden doorway.\n"
      textGo      "You walk through the doorway.\n"
-     open        isAlreadyOpen
 
 - guardToThrone
+     condition   {return goblinGuardUndefeated->health <= 0; }
      description "a wooden doorway to the east"
      tags        "east"
      location    guard
      destination throne
      details     "A wooden doorway.\n"
      textGo      "You walk through the doorway.\n"
-     open        isAlreadyOpen
+
+- guardToThroneBlocked
+     condition   {return goblinGuardUndefeated->health > 0; }
+     description "a wooden doorway to the east"
+     tags        "east"
+     location    guard
+     prospect    throne
+     details     "A guard prevents you from proceeding.\n"
+     textGo      "The guard takes a menacing step.\n"
 
 - throne
      description "The Throne Room"
@@ -480,7 +500,6 @@ extern OBJECT objs[];
      destination guard
      details     "A wooden doorway.\n"
      textGo      "You walk through the doorway.\n"
-     open        isAlreadyOpen
 
 - goblinTraderNoCoin
      condition   { return coin->location == objectFountain || coin->location == player; }
@@ -567,43 +586,9 @@ extern OBJECT objs[];
      health      100
      capacity    20
 
-
-
-
-- field
-     description "an open field"
-     tags        "field"
-     details     "The field is a nice and quiet place under a clear blue sky.\n"
-     capacity    9999
-
-- cave
-     description "a little cave"
-     tags        "cave"
-     details     "The cave is just a cold, damp, rocky chamber.\n"
-     capacity    9999
-
-- silver
-     description "a silver coin"
-     tags        "silver", "coin", "silver coin"
-     location    field
-     details     "The coin has an eagle on the obverse.\n"
-     weight      1
-
-- gold
-     description "a gold coin"
-     tags        "gold", "coin", "gold coin"
-     location    openBox
-     details     "The shiny coin seems to be a rare and priceless artefact.\n"
-     weight      1
-
-- guardWithCoin
-     description "a burly guard"
-     tags        "burly guard"
-     location    field
-     details     "The guard is a really big fellow.\n"
-     contents    "He has"
+- threeGoblins
+     tags        "three", "goblins"
      health      100
-     capacity    20
 
 - player
      description "yourself"
@@ -613,148 +598,3 @@ extern OBJECT objs[];
      contents    "You have"
      health      100
      capacity    20
-
-- intoCave
-     description "a cave entrance to the east"
-     tags        "east", "entrance"
-     location    field
-     destination cave
-     details     "The entrance is just a narrow opening in a small outcrop.\n"
-     textGo      "You walk into the cave.\n"
-     open        isAlreadyOpen
-
-- intoCaveBlocked
-     condition   { return guard->health > 0 && silver->location != guard; }
-     description "a cave entrance to the east"
-     tags        "east", "entrance"
-     location    field
-     prospect    cave
-     details     "The entrance is just a narrow opening in a small outcrop.\n"
-     textGo      "The guard stops you from walking into the cave.\n"
-     open        isAlreadyOpen
-
-- exitCave
-     description "a way out to the west"
-     tags        "west", "out"
-     location    cave
-     destination field
-     details     "Sunlight pours in through an opening in the cave's wall.\n"
-     textGo      "You walk out of the cave.\n"
-     open        isAlreadyOpen
-
-- wallField
-     description "dense forest all around"
-     tags        "west", "north", "south", "forest"
-     location    field
-     details     "The field is surrounded by trees and undergrowth.\n"
-     textGo      "Dense forest is blocking the way.\n"
-
-- wallCave
-     description "solid rock all around"
-     tags        "east", "north", "rock"
-     location    cave
-     details     "Carved in stone is a secret password 'abccb'.\n"
-     textGo      "Solid rock is blocking the way.\n"
-
-- backroom
-     description "a backroom"
-     tags        "backroom"
-     details     "The room is dusty and messy.\n"
-     capacity    9999
-
-- wallBackroom
-     description "solid rock all around"
-     tags        "east", "west", "south", "rock"
-     location    backroom
-     details     "Trendy wallpaper covers the rock walls.\n"
-     textGo      "Solid rock is blocking the way.\n"
-
-- openDoorToBackroom
-     description "an open door to the south"
-     tags        "south", "door", "doorway"
-     destination backroom
-     details     "The door is open.\n"
-     textGo      "You walk through the door into a backroom.\n"
-     open        isAlreadyOpen
-     close       toggleBackdoor
-
-- closedDoorToBackroom
-     description "a closed door to the south"
-     tags        "south", "door", "doorway"
-     location    cave
-     prospect    backroom
-     details     "The door is closed.\n"
-     textGo      "The door is closed.\n"
-     open        toggleBackdoor
-     close       isAlreadyClosed
-
-- openDoorToCave
-     description "an open door to the north"
-     tags        "north", "door", "doorway"
-     destination cave
-     details     "The door is open.\n"
-     textGo      "You walk through the door into the cave.\n"
-     open        isAlreadyOpen
-     close       toggleBackdoor
-
-- closedDoorToCave
-     description "a closed door to the north"
-     tags        "north", "door", "doorway"
-     location    backroom
-     prospect    cave
-     details     "The door is closed.\n"
-     textGo      "The door is closed.\n"
-     open        toggleBackdoor
-     close       isAlreadyClosed
-
-- openBox
-     description "a wooden box"
-     tags        "box", "wooden box"
-     details     "The box is open.\n"
-     weight      5
-     capacity    10
-     open        isAlreadyOpen
-     close       toggleBox
-     lock        isStillOpen
-     unlock      isAlreadyOpen
-
-- closedBox
-     description "a wooden box"
-     tags        "box", "wooden box"
-     details     "The box is closed.\n"
-     weight      5
-     open        toggleBox
-     close       isAlreadyClosed
-     lock        toggleBoxLock
-     unlock      isAlreadyUnlocked
-
-- lockedBox
-     description "a wooden box"
-     tags        "box", "wooden box"
-     location    backroom
-     details     "The box is closed.\n"
-     weight      5
-     open        isStillLocked
-     close       isAlreadyClosed
-     lock        isAlreadyLocked
-     unlock      toggleBoxLock
-
-- keyForBox
-     description "a tiny key"
-     tags        "key", "tiny key"
-     location    cave
-     details     "The key is really small and shiny.\n"
-     weight      1
-
-- lampOff
-     description "a lamp"
-     tags        "lamp"
-     location    field
-     details     "The lamp is off.\n"
-     weight      5
-
-- lampOn
-     description "a lamp"
-     tags        "lamp"
-     details     "The lamp is on.\n"
-     weight      5

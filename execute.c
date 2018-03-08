@@ -4,35 +4,6 @@
 #include "match.h"
 #include "noun.h"
 #include "move.h"
-#include "toggle.h"
-
-bool executeOpen(void)
-{
-   OBJECT *obj = reachableObject("what you want to open", params[0]);
-   if (obj != NULL) printf("%s", (*obj->open)());
-   return true;
-}
-
-bool executeClose(void)
-{
-   OBJECT *obj = reachableObject("what you want to close", params[0]);
-   if (obj != NULL) printf("%s", (*obj->close)());
-   return true;
-}
-
-bool executeLock(void)
-{
-   OBJECT *obj = reachableObject("what you want to lock", params[0]);
-   if (obj != NULL) printf("%s", (*obj->lock)());
-   return true;
-}
-
-bool executeUnlock(void)
-{
-   OBJECT *obj = reachableObject("what you want to unlock", params[0]);
-   if (obj != NULL) printf("%s", (*obj->unlock)());
-   return true;
-}
 
 bool executeGet(void)
 {
@@ -135,30 +106,6 @@ bool executeInventory(void)
    if (listObjectsAtLocation(player) == 0)
    {
       printf("You are empty-handed.\n");
-   }
-   return true;
-}
-
-bool executeTurnOn(void)
-{
-   OBJECT *obj = reachableObject("what you want to turn on", params[0]);
-   if (obj != NULL)
-   {
-      printf("%s", obj == lampOff ? toggleLamp() :
-                   obj == lampOn  ? "The lamp is already on.\n" :
-                                    "You cannot turn that on.\n");
-   }
-   return true;
-}
-
-bool executeTurnOff(void)
-{
-   OBJECT *obj = reachableObject("what you want to turn off", params[0]);
-   if (obj != NULL)
-   {
-      printf("%s", obj == lampOn  ? toggleLamp() :
-                   obj == lampOff ? "The lamp is already off.\n" :
-                                    "You cannot turn that off.\n");
    }
    return true;
 }

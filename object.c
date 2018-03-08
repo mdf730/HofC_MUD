@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "object.h"
-#include "toggle.h"
 static const char *tags0[] = { "entrance", NULL};
 static const char *tags1[] = { "north", "south", "field", NULL};
 static const char *tags2[] = { "east", "door", "doorway", "cliffside", NULL};
@@ -32,77 +31,70 @@ static const char *tags23[] = { "north", NULL};
 static const char *tags24[] = { "pit", NULL};
 static const char *tags25[] = { "west", NULL};
 static const char *tags26[] = { "south", NULL};
+static bool condition27(void)  { return blueKey->location == player; }
 static const char *tags27[] = { "east", NULL};
-static const char *tags28[] = { "north", NULL};
-static const char *tags29[] = { "brawler", NULL};
-static const char *tags30[] = { "club", "leg", "table leg", NULL};
-static const char *tags31[] = { "debris", "trash", "rubbish", "wood", NULL};
-static const char *tags32[] = { "north", "west", NULL};
-static const char *tags33[] = { "south", NULL};
-static const char *tags34[] = { "east", NULL};
-static const char *tags35[] = { "key room", NULL};
-static const char *tags36[] = { "key", "blue key", NULL};
-static const char *tags37[] = { "south", "east", "north", NULL};
-static const char *tags38[] = { "west", NULL};
-static const char *tags39[] = { "riddler", NULL};
-static const char *tags40[] = { "south", "north", NULL};
-static const char *tags41[] = { "west", NULL};
-static const char *tags42[] = { "east", NULL};
-static const char *tags43[] = { "gallery", NULL};
+static bool condition28(void)  { return blueKey->location != player; }
+static const char *tags28[] = { "east", NULL};
+static const char *tags29[] = { "north", NULL};
+static const char *tags30[] = { "brawler", NULL};
+static const char *tags31[] = { "club", "leg", "table leg", NULL};
+static const char *tags32[] = { "debris", "trash", "rubbish", "wood", NULL};
+static const char *tags33[] = { "north", "west", NULL};
+static const char *tags34[] = { "south", NULL};
+static bool condition35(void)  { return brawler->health <= 0; }
+static const char *tags35[] = { "east", NULL};
+static bool condition36(void)  { return brawler->health > 0; }
+static const char *tags36[] = { "east", NULL};
+static const char *tags37[] = { "key room", NULL};
+static const char *tags38[] = { "key", "blue key", NULL};
+static const char *tags39[] = { "south", "east", "north", NULL};
+static const char *tags40[] = { "west", NULL};
+static const char *tags41[] = { "riddler", NULL};
+static const char *tags42[] = { "south", "north", NULL};
+static const char *tags43[] = { "west", NULL};
+static bool condition44(void)  { return goblinRiddler->health <= 50; }
 static const char *tags44[] = { "east", NULL};
-static const char *tags45[] = { "north", NULL};
-static const char *tags46[] = { "south", NULL};
-static const char *tags47[] = { "west", NULL};
-static const char *tags48[] = { "store", NULL};
-static const char *tags49[] = { "scroll", "unfurled scroll", NULL};
-static const char *tags50[] = { "north", "east", "west", NULL};
-static const char *tags51[] = { "south", NULL};
-static const char *tags52[] = { "guard", NULL};
-static const char *tags53[] = { "south", "west", NULL};
-static const char *tags54[] = { "north", NULL};
-static const char *tags55[] = { "east", NULL};
-static const char *tags56[] = { "throne", NULL};
-static const char *tags57[] = { "north", "south", "east", NULL};
-static const char *tags58[] = { "west", NULL};
-static bool condition59(void)  { return coin->location == objectFountain || coin->location == player; }
-static const char *tags59[] = { "trader", "goblin trader", "goblin", NULL};
-static const char *tags60[] = { "key", "polished key", NULL};
-static bool condition61(void)  { return coin->location != objectFountain && coin->location != player; }
-static const char *tags61[] = { "trader", "goblin trader", "goblin", NULL};
-static bool condition62(void)  { return goblinBrawlerUndefeated->health > 0; }
-static const char *tags62[] = { "brawler", "goblin brawler", "goblin", NULL};
-static bool condition63(void)  { return goblinBrawlerUndefeated->health <= 0; }
-static const char *tags63[] = { "brawler", "goblin brawler", "goblin", NULL};
-static const char *tags64[] = { "riddler", "goblin riddler", "goblin", "lerp", NULL};
-static bool condition65(void)  { return goblinGuardUndefeated->health > 0; }
-static const char *tags65[] = { "guard", "goblin guard", "goblin", "frank", NULL};
-static bool condition66(void)  { return goblinGuardDefeated->health <= 0; }
-static const char *tags66[] = { "guard", "goblin guard", "goblin", "frank", NULL};
-static const char *tags67[] = { "king", "goblin king", "goblin", NULL};
-static const char *tags68[] = { "field", NULL};
-static const char *tags69[] = { "cave", NULL};
-static const char *tags70[] = { "silver", "coin", "silver coin", NULL};
-static const char *tags71[] = { "gold", "coin", "gold coin", NULL};
-static const char *tags72[] = { "burly guard", NULL};
-static const char *tags73[] = { "yourself", NULL};
-static const char *tags74[] = { "east", "entrance", NULL};
-static bool condition75(void)  { return guard->health > 0 && silver->location != guard; }
-static const char *tags75[] = { "east", "entrance", NULL};
-static const char *tags76[] = { "west", "out", NULL};
-static const char *tags77[] = { "west", "north", "south", "forest", NULL};
-static const char *tags78[] = { "east", "north", "rock", NULL};
-static const char *tags79[] = { "backroom", NULL};
-static const char *tags80[] = { "east", "west", "south", "rock", NULL};
-static const char *tags81[] = { "south", "door", "doorway", NULL};
-static const char *tags82[] = { "south", "door", "doorway", NULL};
-static const char *tags83[] = { "north", "door", "doorway", NULL};
-static const char *tags84[] = { "north", "door", "doorway", NULL};
-static const char *tags85[] = { "box", "wooden box", NULL};
-static const char *tags86[] = { "box", "wooden box", NULL};
-static const char *tags87[] = { "box", "wooden box", NULL};
-static const char *tags88[] = { "key", "tiny key", NULL};
-static const char *tags89[] = { "lamp", NULL};
-static const char *tags90[] = { "lamp", NULL};
+static bool condition45(void)  { return goblinRiddler->health > 50; }
+static const char *tags45[] = { "east", NULL};
+static const char *tags46[] = { "gallery", NULL};
+static const char *tags47[] = { "east", NULL};
+static const char *tags48[] = { "north", NULL};
+static bool condition49(void)  { return threeGoblins->health <= 0; }
+static const char *tags49[] = { "south", NULL};
+static bool condition50(void)  { return threeGoblins->health > 0; }
+static const char *tags50[] = { "south", NULL};
+static const char *tags51[] = { "west", NULL};
+static const char *tags52[] = { "store", NULL};
+static const char *tags53[] = { "scroll", "unfurled scroll", NULL};
+static const char *tags54[] = { "north", "east", "west", NULL};
+static const char *tags55[] = { "south", NULL};
+static const char *tags56[] = { "guard", NULL};
+static const char *tags57[] = { "south", "west", NULL};
+static const char *tags58[] = { "north", NULL};
+static bool condition59(void)  {return goblinGuardUndefeated->health <= 0; }
+static const char *tags59[] = { "east", NULL};
+static bool condition60(void)  {return goblinGuardUndefeated->health > 0; }
+static const char *tags60[] = { "east", NULL};
+static const char *tags61[] = { "throne", NULL};
+static const char *tags62[] = { "north", "south", "east", NULL};
+static const char *tags63[] = { "west", NULL};
+static bool condition64(void)  { return coin->location == objectFountain || coin->location == player; }
+static const char *tags64[] = { "trader", "goblin trader", "goblin", NULL};
+static const char *tags65[] = { "key", "polished key", NULL};
+static bool condition66(void)  { return coin->location != objectFountain && coin->location != player; }
+static const char *tags66[] = { "trader", "goblin trader", "goblin", NULL};
+static bool condition67(void)  { return goblinBrawlerUndefeated->health > 0; }
+static const char *tags67[] = { "brawler", "goblin brawler", "goblin", NULL};
+static bool condition68(void)  { return goblinBrawlerUndefeated->health <= 0; }
+static const char *tags68[] = { "brawler", "goblin brawler", "goblin", NULL};
+static const char *tags69[] = { "riddler", "goblin riddler", "goblin", "lerp", NULL};
+static bool condition70(void)  { return goblinGuardUndefeated->health > 0; }
+static const char *tags70[] = { "guard", "goblin guard", "goblin", "frank", NULL};
+static bool condition71(void)  { return goblinGuardDefeated->health <= 0; }
+static const char *tags71[] = { "guard", "goblin guard", "goblin", "frank", NULL};
+static const char *tags72[] = { "king", "goblin king", "goblin", NULL};
+static const char *tags73[] = { "three", "goblins", NULL};
+static const char *tags74[] = { "yourself", NULL};
 
 static bool alwaysTrue(void) { return true; }
 
@@ -119,11 +111,7 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		99,
 		 9999,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
 	{	/* 1 = wallEntrance */
 		alwaysTrue,
@@ -137,11 +125,7 @@ OBJECT objs[] = {
 		 "You stare off into the distance at the field, but remain where you are.\n",
 		99,
 		0,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
 	{	/* 2 = intoFountain */
 		alwaysTrue,
@@ -155,11 +139,7 @@ OBJECT objs[] = {
 		 "You walk through the doorway.\n",
 		99,
 		0,
-		0,
-		 isAlreadyOpen,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
 	{	/* 3 = intoVillage */
 		alwaysTrue,
@@ -173,11 +153,7 @@ OBJECT objs[] = {
 		 "You walk down the winding road back home.\n",
 		99,
 		0,
-		0,
-		 isAlreadyOpen,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
 	{	/* 4 = village */
 		alwaysTrue,
@@ -191,11 +167,7 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		99,
 		 9999,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
 	{	/* 5 = wallVillage */
 		alwaysTrue,
@@ -209,11 +181,7 @@ OBJECT objs[] = {
 		 "You make your way through the village.\n",
 		99,
 		0,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
 	{	/* 6 = villageToEntrance */
 		alwaysTrue,
@@ -227,11 +195,7 @@ OBJECT objs[] = {
 		 "You walk back down the path.\n",
 		99,
 		0,
-		0,
-		 isAlreadyOpen,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
 	{	/* 7 = fountainRoom */
 		alwaysTrue,
@@ -245,11 +209,7 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		99,
 		 9999,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
 	{	/* 8 = wallFountain */
 		alwaysTrue,
@@ -263,11 +223,7 @@ OBJECT objs[] = {
 		 "You run into the wall, receiving a bruise on your chin for the effort. This isn't Hogwarts...\n",
 		99,
 		0,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
 	{	/* 9 = intoEntrance */
 		alwaysTrue,
@@ -281,11 +237,7 @@ OBJECT objs[] = {
 		 "You walk through the doorway.\n",
 		99,
 		0,
-		0,
-		 isAlreadyOpen,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
 	{	/* 10 = intoTrader */
 		alwaysTrue,
@@ -299,11 +251,7 @@ OBJECT objs[] = {
 		 "You walk through the doorway.\n",
 		99,
 		0,
-		0,
-		 isAlreadyOpen,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
 	{	/* 11 = intoPit */
 		condition11,
@@ -317,11 +265,7 @@ OBJECT objs[] = {
 		 "You walk through the doorway.\n",
 		99,
 		0,
-		0,
-		 isAlreadyOpen,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
 	{	/* 12 = intoPitBlocked */
 		condition12,
@@ -335,11 +279,7 @@ OBJECT objs[] = {
 		 "The lock rattles. You can't break through.\n",
 		99,
 		0,
-		0,
-		 isAlreadyOpen,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
 	{	/* 13 = objectFountain */
 		alwaysTrue,
@@ -353,11 +293,7 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		 100,
 		0,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
 	{	/* 14 = coin */
 		alwaysTrue,
@@ -371,11 +307,7 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		 1,
 		0,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
 	{	/* 15 = trader */
 		alwaysTrue,
@@ -389,11 +321,7 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		99,
 		 9999,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
 	{	/* 16 = mat */
 		alwaysTrue,
@@ -407,11 +335,7 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		 9999,
 		0,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
 	{	/* 17 = traderWall */
 		alwaysTrue,
@@ -425,11 +349,7 @@ OBJECT objs[] = {
 		 "You can't walk through a solid wall...\n",
 		99,
 		0,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
 	{	/* 18 = traderToFountain */
 		alwaysTrue,
@@ -443,11 +363,7 @@ OBJECT objs[] = {
 		 "You walk through the doorway.\n",
 		99,
 		0,
-		0,
-		 isAlreadyOpen,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
 	{	/* 19 = traderToSecret */
 		condition19,
@@ -461,11 +377,7 @@ OBJECT objs[] = {
 		 "You walk through the debris.\n",
 		99,
 		0,
-		0,
-		 isAlreadyOpen,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
 	{	/* 20 = traderToSecretBlocked */
 		condition20,
@@ -479,11 +391,7 @@ OBJECT objs[] = {
 		 "You push on the bricks and they move ever so slightly, but not enough to walk through.\n",
 		99,
 		0,
-		 1,
-		 isAlreadyOpen,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		 1
 	},
 	{	/* 21 = secret */
 		alwaysTrue,
@@ -497,11 +405,7 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		99,
 		 9999,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
 	{	/* 22 = wallSecret */
 		alwaysTrue,
@@ -515,11 +419,7 @@ OBJECT objs[] = {
 		 "Nope. There's only one false wall in this game.\n",
 		99,
 		0,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
 	{	/* 23 = secretToTrader */
 		alwaysTrue,
@@ -533,11 +433,7 @@ OBJECT objs[] = {
 		 "You walk through the debris.\n",
 		99,
 		0,
-		0,
-		 isAlreadyOpen,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
 	{	/* 24 = pit */
 		alwaysTrue,
@@ -551,11 +447,7 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		99,
 		 9999,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
 	{	/* 25 = wallPit */
 		alwaysTrue,
@@ -569,11 +461,7 @@ OBJECT objs[] = {
 		 "As you try to move west, you fall into the pit. It takes several grueling hours to make your way out.\n",
 		99,
 		0,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
 	{	/* 26 = pitToFountain */
 		alwaysTrue,
@@ -587,34 +475,40 @@ OBJECT objs[] = {
 		 "You walk through the doorway.\n",
 		99,
 		0,
-		0,
-		 isAlreadyOpen,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
 	{	/* 27 = pitToRiddler */
-		alwaysTrue,
-		 "a wooden doorway to the east",
+		condition27,
+		 "a blue doorway to the east",
 		tags27,
 		 pit,
 		 riddler,
 		 riddler,
-		 "A wooden doorway is closed. A lock gleams under the door's handle.\n",
+		 "The blue doorway is open. You have the key.\n",
 		"You see",
 		 "You walk through the doorway.\n",
 		99,
 		0,
-		0,
-		 isAlreadyOpen,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 28 = pitToBrawler */
+	{	/* 28 = pitToRiddlerBlocked */
+		condition28,
+		 "a locked blue doorway to the east",
+		tags28,
+		 pit,
+		NULL,
+		 riddler,
+		 "The blue doorway is closed. A lock gleams under the door's handle.\n",
+		"You see",
+		 "You bounce off the door. Ouch.\n",
+		99,
+		0,
+		0
+	},
+	{	/* 29 = pitToBrawler */
 		alwaysTrue,
 		 "a wooden doorway to the north",
-		tags28,
+		tags29,
 		 pit,
 		 brawler,
 		 brawler,
@@ -623,16 +517,12 @@ OBJECT objs[] = {
 		 "You walk through the doorway.\n",
 		99,
 		0,
-		0,
-		 isAlreadyOpen,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 29 = brawler */
+	{	/* 30 = brawler */
 		alwaysTrue,
 		 "The Brawler",
-		tags29,
+		tags30,
 		NULL,
 		NULL,
 		NULL,
@@ -641,16 +531,12 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		99,
 		 9999,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 30 = club */
+	{	/* 31 = club */
 		alwaysTrue,
 		 "a table leg",
-		tags30,
+		tags31,
 		 brawler,
 		NULL,
 		NULL,
@@ -659,16 +545,12 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		 1,
 		0,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 31 = debris */
+	{	/* 32 = debris */
 		alwaysTrue,
 		 "a lot of junk",
-		tags31,
+		tags32,
 		 brawler,
 		NULL,
 		NULL,
@@ -677,16 +559,12 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		 100,
 		0,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 32 = wallBrawler */
+	{	/* 33 = wallBrawler */
 		alwaysTrue,
 		NULL,
-		tags32,
+		tags33,
 		 brawler,
 		 brawler,
 		 brawler,
@@ -695,16 +573,12 @@ OBJECT objs[] = {
 		 "You run your finger along the wall. When you pull away, a residue stays on your hand, making it sticky.\n",
 		99,
 		0,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 33 = brawlerToPit */
+	{	/* 34 = brawlerToPit */
 		alwaysTrue,
 		 "a wooden doorway to the south",
-		tags33,
+		tags34,
 		 brawler,
 		 pit,
 		 pit,
@@ -713,34 +587,40 @@ OBJECT objs[] = {
 		 "You walk through the doorway.\n",
 		99,
 		0,
-		0,
-		 isAlreadyOpen,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 34 = brawlerToKey */
-		alwaysTrue,
+	{	/* 35 = brawlerToKey */
+		condition35,
 		 "a door to the key room",
-		tags34,
+		tags35,
 		 brawler,
 		 key,
 		 key,
-		 "A wooden doorway is closed. A lock gleams under the door's handle.\n",
+		 "The brawler is defeated, and the door is open behind him.\n",
 		"You see",
 		 "You walk through the doorway.\n",
 		99,
 		0,
-		0,
-		 isAlreadyOpen,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 35 = key */
+	{	/* 36 = brawlerToKeyBlocked */
+		condition36,
+		 "a door to the key room",
+		tags36,
+		 brawler,
+		NULL,
+		 key,
+		 "You can make out any details about the door behind the brawler's looming frame.\n",
+		"You see",
+		 "The brawler swipes at you angrily. You stay where you are.\n",
+		99,
+		0,
+		0
+	},
+	{	/* 37 = key */
 		alwaysTrue,
 		 "Key Room",
-		tags35,
+		tags37,
 		NULL,
 		NULL,
 		NULL,
@@ -749,16 +629,12 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		99,
 		 9999,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 36 = blueKey */
+	{	/* 38 = blueKey */
 		alwaysTrue,
 		 "a blue key",
-		tags36,
+		tags38,
 		 key,
 		NULL,
 		NULL,
@@ -767,16 +643,12 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		 1,
 		0,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 37 = wallKey */
+	{	/* 39 = wallKey */
 		alwaysTrue,
 		NULL,
-		tags37,
+		tags39,
 		 key,
 		 key,
 		 key,
@@ -785,16 +657,12 @@ OBJECT objs[] = {
 		 "It's too dark to go that way.\n",
 		99,
 		0,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 38 = keyToBrawler */
+	{	/* 40 = keyToBrawler */
 		alwaysTrue,
 		 "a door to the brawler room",
-		tags38,
+		tags40,
 		 key,
 		 brawler,
 		 brawler,
@@ -803,16 +671,12 @@ OBJECT objs[] = {
 		 "You walk through the doorway.\n",
 		99,
 		0,
-		0,
-		 isAlreadyOpen,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 39 = riddler */
+	{	/* 41 = riddler */
 		alwaysTrue,
 		 "The Riddler's Room",
-		tags39,
+		tags41,
 		NULL,
 		NULL,
 		NULL,
@@ -821,16 +685,12 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		99,
 		 9999,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 40 = wallRiddler */
+	{	/* 42 = wallRiddler */
 		alwaysTrue,
 		NULL,
-		tags40,
+		tags42,
 		 riddler,
 		 riddler,
 		 riddler,
@@ -839,16 +699,12 @@ OBJECT objs[] = {
 		 "You get to close to the wall and nearly set your hair on fire from one of the lanterns.\n",
 		99,
 		0,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 41 = riddlerToPit */
+	{	/* 43 = riddlerToPit */
 		alwaysTrue,
 		 "a wooden doorway to the west",
-		tags41,
+		tags43,
 		 riddler,
 		 pit,
 		 pit,
@@ -857,16 +713,12 @@ OBJECT objs[] = {
 		 "You walk through the doorway.\n",
 		99,
 		0,
-		0,
-		 isAlreadyOpen,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 42 = riddlerToGallery */
-		alwaysTrue,
+	{	/* 44 = riddlerToGallery */
+		condition44,
 		 "a wooden doorway to the east",
-		tags42,
+		tags44,
 		 riddler,
 		 gallery,
 		 gallery,
@@ -875,16 +727,26 @@ OBJECT objs[] = {
 		 "You walk through the doorway.\n",
 		99,
 		0,
-		0,
-		 isAlreadyOpen,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 43 = gallery */
+	{	/* 45 = riddlerToGalleryBlocked */
+		condition45,
+		 "a closed doorway to the east",
+		tags45,
+		 riddler,
+		NULL,
+		 gallery,
+		 "A wooden doorway.\n",
+		"You see",
+		 "'Tsk, tsk,' says the riddler. 'No leaving until you answer my riddle!'.\n",
+		99,
+		0,
+		0
+	},
+	{	/* 46 = gallery */
 		alwaysTrue,
 		 "Gallery",
-		tags43,
+		tags46,
 		NULL,
 		NULL,
 		NULL,
@@ -893,16 +755,12 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		99,
 		 9999,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 44 = wallGallery */
+	{	/* 47 = wallGallery */
 		alwaysTrue,
 		NULL,
-		tags44,
+		tags47,
 		 gallery,
 		 gallery,
 		 gallery,
@@ -911,16 +769,12 @@ OBJECT objs[] = {
 		 "There's nowhere to go!\n",
 		99,
 		0,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 45 = galleryToStore */
+	{	/* 48 = galleryToStore */
 		alwaysTrue,
 		 "a wooden doorway to the north",
-		tags45,
+		tags48,
 		 gallery,
 		 store,
 		 store,
@@ -929,34 +783,40 @@ OBJECT objs[] = {
 		 "You walk through the doorway.\n",
 		99,
 		0,
-		0,
-		 isAlreadyOpen,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 46 = galleryToGuard */
-		alwaysTrue,
-		 "a wooden doorway to the south",
-		tags46,
+	{	/* 49 = galleryToGuard */
+		condition49,
+		 "an ornate doorway to the south",
+		tags49,
 		 gallery,
 		 guard,
 		 guard,
-		 "A wooden doorway.\n",
+		 "An ornate doorway.\n",
 		"You see",
 		 "You walk through the doorway.\n",
 		99,
 		0,
-		0,
-		 isAlreadyOpen,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 47 = galleryToRiddler */
+	{	/* 50 = galleryToGuardBlocked */
+		condition50,
+		 "an ornate doorway to the south",
+		tags50,
+		 gallery,
+		NULL,
+		 guard,
+		 "An ornate doorway to the south is mysteriously closed.\n",
+		"You see",
+		 "You shall not pass.\n",
+		99,
+		0,
+		0
+	},
+	{	/* 51 = galleryToRiddler */
 		alwaysTrue,
 		 "a wooden doorway to the west",
-		tags47,
+		tags51,
 		 gallery,
 		 riddler,
 		 riddler,
@@ -965,16 +825,12 @@ OBJECT objs[] = {
 		 "You walk through the doorway.\n",
 		99,
 		0,
-		0,
-		 isAlreadyOpen,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 48 = store */
+	{	/* 52 = store */
 		alwaysTrue,
 		 "Storeroom",
-		tags48,
+		tags52,
 		NULL,
 		NULL,
 		NULL,
@@ -983,16 +839,12 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		99,
 		 9999,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 49 = scroll */
+	{	/* 53 = scroll */
 		alwaysTrue,
 		 "an unfurled scroll",
-		tags49,
+		tags53,
 		 store,
 		NULL,
 		NULL,
@@ -1001,16 +853,12 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		 9999,
 		0,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 50 = wallStore */
+	{	/* 54 = wallStore */
 		alwaysTrue,
 		NULL,
-		tags50,
+		tags54,
 		 store,
 		 store,
 		 store,
@@ -1019,16 +867,12 @@ OBJECT objs[] = {
 		 "You really don't want to touch the cobwebs on the walls.\n",
 		99,
 		0,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 51 = storeToGallery */
+	{	/* 55 = storeToGallery */
 		alwaysTrue,
 		 "a wooden doorway to the south",
-		tags51,
+		tags55,
 		 store,
 		 gallery,
 		 gallery,
@@ -1037,16 +881,12 @@ OBJECT objs[] = {
 		 "You walk through the doorway.\n",
 		99,
 		0,
-		0,
-		 isAlreadyOpen,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 52 = guard */
+	{	/* 56 = guard */
 		alwaysTrue,
 		 "Guard Room",
-		tags52,
+		tags56,
 		NULL,
 		NULL,
 		NULL,
@@ -1055,16 +895,12 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		99,
 		 9999,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 53 = wallGuard */
+	{	/* 57 = wallGuard */
 		alwaysTrue,
 		NULL,
-		tags53,
+		tags57,
 		 guard,
 		 guard,
 		 guard,
@@ -1073,16 +909,12 @@ OBJECT objs[] = {
 		 "Why even try at this point?\n",
 		99,
 		0,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 54 = guardToGallery */
+	{	/* 58 = guardToGallery */
 		alwaysTrue,
 		 "a wooden doorway to the north",
-		tags54,
+		tags58,
 		 guard,
 		 gallery,
 		 gallery,
@@ -1091,16 +923,12 @@ OBJECT objs[] = {
 		 "You walk through the doorway.\n",
 		99,
 		0,
-		0,
-		 isAlreadyOpen,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 55 = guardToThrone */
-		alwaysTrue,
+	{	/* 59 = guardToThrone */
+		condition59,
 		 "a wooden doorway to the east",
-		tags55,
+		tags59,
 		 guard,
 		 throne,
 		 throne,
@@ -1109,16 +937,26 @@ OBJECT objs[] = {
 		 "You walk through the doorway.\n",
 		99,
 		0,
-		0,
-		 isAlreadyOpen,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 56 = throne */
+	{	/* 60 = guardToThroneBlocked */
+		condition60,
+		 "a wooden doorway to the east",
+		tags60,
+		 guard,
+		NULL,
+		 throne,
+		 "A guard prevents you from proceeding.\n",
+		"You see",
+		 "The guard takes a menacing step.\n",
+		99,
+		0,
+		0
+	},
+	{	/* 61 = throne */
 		alwaysTrue,
 		 "The Throne Room",
-		tags56,
+		tags61,
 		NULL,
 		NULL,
 		NULL,
@@ -1127,16 +965,12 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		99,
 		 9999,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 57 = wallThrone */
+	{	/* 62 = wallThrone */
 		alwaysTrue,
 		NULL,
-		tags57,
+		tags62,
 		 throne,
 		 throne,
 		 throne,
@@ -1145,16 +979,12 @@ OBJECT objs[] = {
 		 "You play in the tapestry for a bit before returning to the center of the throne room.\n",
 		99,
 		0,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 58 = throneToGuard */
+	{	/* 63 = throneToGuard */
 		alwaysTrue,
 		 "a wooden doorway to the west",
-		tags58,
+		tags63,
 		 throne,
 		 guard,
 		 guard,
@@ -1163,16 +993,12 @@ OBJECT objs[] = {
 		 "You walk through the doorway.\n",
 		99,
 		0,
-		0,
-		 isAlreadyOpen,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 59 = goblinTraderNoCoin */
-		condition59,
+	{	/* 64 = goblinTraderNoCoin */
+		condition64,
 		 "Bub the Trader of Shinies",
-		tags59,
+		tags64,
 		 trader,
 		NULL,
 		NULL,
@@ -1181,16 +1007,12 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		99,
 		 20,
-		 100,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		 100
 	},
-	{	/* 60 = polishedKey */
+	{	/* 65 = polishedKey */
 		alwaysTrue,
 		 "a polished key",
-		tags60,
+		tags65,
 		 goblinTraderNoCoin,
 		NULL,
 		NULL,
@@ -1199,16 +1021,12 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		 1,
 		0,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		0
 	},
-	{	/* 61 = goblinTraderHasCoin */
-		condition61,
+	{	/* 66 = goblinTraderHasCoin */
+		condition66,
 		 "Bub the Trader of Shinies",
-		tags61,
+		tags66,
 		 trader,
 		NULL,
 		NULL,
@@ -1217,16 +1035,12 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		99,
 		 20,
-		 100,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		 100
 	},
-	{	/* 62 = goblinBrawlerUndefeated */
-		condition62,
+	{	/* 67 = goblinBrawlerUndefeated */
+		condition67,
 		 "Bumpy the Cudgelist",
-		tags62,
+		tags67,
 		 brawler,
 		NULL,
 		NULL,
@@ -1235,16 +1049,12 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		99,
 		 20,
-		 3,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		 3
 	},
-	{	/* 63 = goblinBrawlerDefeated */
-		condition63,
+	{	/* 68 = goblinBrawlerDefeated */
+		condition68,
 		 "Bumpy the Cudgelist",
-		tags63,
+		tags68,
 		 brawler,
 		NULL,
 		NULL,
@@ -1253,16 +1063,12 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		99,
 		 20,
-		 100,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		 100
 	},
-	{	/* 64 = goblinRiddler */
+	{	/* 69 = goblinRiddler */
 		alwaysTrue,
 		 "Lerp the Riddlemaster",
-		tags64,
+		tags69,
 		 riddler,
 		NULL,
 		NULL,
@@ -1271,16 +1077,12 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		99,
 		 20,
-		 100,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		 100
 	},
-	{	/* 65 = goblinGuardUndefeated */
-		condition65,
+	{	/* 70 = goblinGuardUndefeated */
+		condition70,
 		 "Royal Gobo Guard Frank",
-		tags65,
+		tags70,
 		 guard,
 		NULL,
 		NULL,
@@ -1289,16 +1091,12 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		99,
 		 20,
-		 6,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		 6
 	},
-	{	/* 66 = goblinGuardDefeated */
-		condition66,
+	{	/* 71 = goblinGuardDefeated */
+		condition71,
 		 "Royal Gobo Guard Frank",
-		tags66,
+		tags71,
 		 guard,
 		NULL,
 		NULL,
@@ -1307,16 +1105,12 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		99,
 		 20,
-		 100,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		 100
 	},
-	{	/* 67 = goblinKing */
+	{	/* 72 = goblinKing */
 		alwaysTrue,
 		 "King Gobo, Keeper of the Goblin Goblet",
-		tags67,
+		tags72,
 		 throne,
 		NULL,
 		NULL,
@@ -1325,106 +1119,26 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		99,
 		 20,
-		 100,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		 100
 	},
-	{	/* 68 = field */
+	{	/* 73 = threeGoblins */
 		alwaysTrue,
-		 "an open field",
-		tags68,
+		NULL,
+		tags73,
 		NULL,
 		NULL,
 		NULL,
-		 "The field is a nice and quiet place under a clear blue sky.\n",
+		"You see nothing special.\n",
 		"You see",
 		"You can't get much closer than this.\n",
 		99,
-		 9999,
 		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		 100
 	},
-	{	/* 69 = cave */
-		alwaysTrue,
-		 "a little cave",
-		tags69,
-		NULL,
-		NULL,
-		NULL,
-		 "The cave is just a cold, damp, rocky chamber.\n",
-		"You see",
-		"You can't get much closer than this.\n",
-		99,
-		 9999,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
-	},
-	{	/* 70 = silver */
-		alwaysTrue,
-		 "a silver coin",
-		tags70,
-		 field,
-		NULL,
-		NULL,
-		 "The coin has an eagle on the obverse.\n",
-		"You see",
-		"You can't get much closer than this.\n",
-		 1,
-		0,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
-	},
-	{	/* 71 = gold */
-		alwaysTrue,
-		 "a gold coin",
-		tags71,
-		 openBox,
-		NULL,
-		NULL,
-		 "The shiny coin seems to be a rare and priceless artefact.\n",
-		"You see",
-		"You can't get much closer than this.\n",
-		 1,
-		0,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
-	},
-	{	/* 72 = guardWithCoin */
-		alwaysTrue,
-		 "a burly guard",
-		tags72,
-		 field,
-		NULL,
-		NULL,
-		 "The guard is a really big fellow.\n",
-		 "He has",
-		"You can't get much closer than this.\n",
-		99,
-		 20,
-		 100,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
-	},
-	{	/* 73 = player */
+	{	/* 74 = player */
 		alwaysTrue,
 		 "yourself",
-		tags73,
+		tags74,
 		 entrance,
 		NULL,
 		NULL,
@@ -1433,316 +1147,6 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		99,
 		 20,
-		 100,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
-	},
-	{	/* 74 = intoCave */
-		alwaysTrue,
-		 "a cave entrance to the east",
-		tags74,
-		 field,
-		 cave,
-		 cave,
-		 "The entrance is just a narrow opening in a small outcrop.\n",
-		"You see",
-		 "You walk into the cave.\n",
-		99,
-		0,
-		0,
-		 isAlreadyOpen,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
-	},
-	{	/* 75 = intoCaveBlocked */
-		condition75,
-		 "a cave entrance to the east",
-		tags75,
-		 field,
-		NULL,
-		 cave,
-		 "The entrance is just a narrow opening in a small outcrop.\n",
-		"You see",
-		 "The guard stops you from walking into the cave.\n",
-		99,
-		0,
-		0,
-		 isAlreadyOpen,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
-	},
-	{	/* 76 = exitCave */
-		alwaysTrue,
-		 "a way out to the west",
-		tags76,
-		 cave,
-		 field,
-		 field,
-		 "Sunlight pours in through an opening in the cave's wall.\n",
-		"You see",
-		 "You walk out of the cave.\n",
-		99,
-		0,
-		0,
-		 isAlreadyOpen,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
-	},
-	{	/* 77 = wallField */
-		alwaysTrue,
-		 "dense forest all around",
-		tags77,
-		 field,
-		NULL,
-		NULL,
-		 "The field is surrounded by trees and undergrowth.\n",
-		"You see",
-		 "Dense forest is blocking the way.\n",
-		99,
-		0,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
-	},
-	{	/* 78 = wallCave */
-		alwaysTrue,
-		 "solid rock all around",
-		tags78,
-		 cave,
-		NULL,
-		NULL,
-		 "Carved in stone is a secret password 'abccb'.\n",
-		"You see",
-		 "Solid rock is blocking the way.\n",
-		99,
-		0,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
-	},
-	{	/* 79 = backroom */
-		alwaysTrue,
-		 "a backroom",
-		tags79,
-		NULL,
-		NULL,
-		NULL,
-		 "The room is dusty and messy.\n",
-		"You see",
-		"You can't get much closer than this.\n",
-		99,
-		 9999,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
-	},
-	{	/* 80 = wallBackroom */
-		alwaysTrue,
-		 "solid rock all around",
-		tags80,
-		 backroom,
-		NULL,
-		NULL,
-		 "Trendy wallpaper covers the rock walls.\n",
-		"You see",
-		 "Solid rock is blocking the way.\n",
-		99,
-		0,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
-	},
-	{	/* 81 = openDoorToBackroom */
-		alwaysTrue,
-		 "an open door to the south",
-		tags81,
-		NULL,
-		 backroom,
-		 backroom,
-		 "The door is open.\n",
-		"You see",
-		 "You walk through the door into a backroom.\n",
-		99,
-		0,
-		0,
-		 isAlreadyOpen,
-		 toggleBackdoor,
-		cannotBeLocked,
-		cannotBeUnlocked
-	},
-	{	/* 82 = closedDoorToBackroom */
-		alwaysTrue,
-		 "a closed door to the south",
-		tags82,
-		 cave,
-		NULL,
-		 backroom,
-		 "The door is closed.\n",
-		"You see",
-		 "The door is closed.\n",
-		99,
-		0,
-		0,
-		 toggleBackdoor,
-		 isAlreadyClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
-	},
-	{	/* 83 = openDoorToCave */
-		alwaysTrue,
-		 "an open door to the north",
-		tags83,
-		NULL,
-		 cave,
-		 cave,
-		 "The door is open.\n",
-		"You see",
-		 "You walk through the door into the cave.\n",
-		99,
-		0,
-		0,
-		 isAlreadyOpen,
-		 toggleBackdoor,
-		cannotBeLocked,
-		cannotBeUnlocked
-	},
-	{	/* 84 = closedDoorToCave */
-		alwaysTrue,
-		 "a closed door to the north",
-		tags84,
-		 backroom,
-		NULL,
-		 cave,
-		 "The door is closed.\n",
-		"You see",
-		 "The door is closed.\n",
-		99,
-		0,
-		0,
-		 toggleBackdoor,
-		 isAlreadyClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
-	},
-	{	/* 85 = openBox */
-		alwaysTrue,
-		 "a wooden box",
-		tags85,
-		NULL,
-		NULL,
-		NULL,
-		 "The box is open.\n",
-		"You see",
-		"You can't get much closer than this.\n",
-		 5,
-		 10,
-		0,
-		 isAlreadyOpen,
-		 toggleBox,
-		 isStillOpen,
-		 isAlreadyOpen
-	},
-	{	/* 86 = closedBox */
-		alwaysTrue,
-		 "a wooden box",
-		tags86,
-		NULL,
-		NULL,
-		NULL,
-		 "The box is closed.\n",
-		"You see",
-		"You can't get much closer than this.\n",
-		 5,
-		0,
-		0,
-		 toggleBox,
-		 isAlreadyClosed,
-		 toggleBoxLock,
-		 isAlreadyUnlocked
-	},
-	{	/* 87 = lockedBox */
-		alwaysTrue,
-		 "a wooden box",
-		tags87,
-		 backroom,
-		NULL,
-		NULL,
-		 "The box is closed.\n",
-		"You see",
-		"You can't get much closer than this.\n",
-		 5,
-		0,
-		0,
-		 isStillLocked,
-		 isAlreadyClosed,
-		 isAlreadyLocked,
-		 toggleBoxLock
-	},
-	{	/* 88 = keyForBox */
-		alwaysTrue,
-		 "a tiny key",
-		tags88,
-		 cave,
-		NULL,
-		NULL,
-		 "The key is really small and shiny.\n",
-		"You see",
-		"You can't get much closer than this.\n",
-		 1,
-		0,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
-	},
-	{	/* 89 = lampOff */
-		alwaysTrue,
-		 "a lamp",
-		tags89,
-		 field,
-		NULL,
-		NULL,
-		 "The lamp is off.\n",
-		"You see",
-		"You can't get much closer than this.\n",
-		 5,
-		0,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
-	},
-	{	/* 90 = lampOn */
-		alwaysTrue,
-		 "a lamp",
-		tags90,
-		NULL,
-		NULL,
-		NULL,
-		 "The lamp is on.\n",
-		"You see",
-		"You can't get much closer than this.\n",
-		 5,
-		0,
-		0,
-		cannotBeOpened,
-		cannotBeClosed,
-		cannotBeLocked,
-		cannotBeUnlocked
+		 100
 	}
 };

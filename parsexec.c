@@ -42,6 +42,7 @@ bool parseAndExecute(const char *input)
       {executeGo        , "go A"},
       {executeGetFrom   , "get A from B"},
       {executeGet       , "get A"},
+      {executeGet       , "take A"},
       {executePutIn     , "put A in B"},
       {executePutIn     , "drop A in B"},
       {executeDrop      , "drop A"},
@@ -50,14 +51,6 @@ bool parseAndExecute(const char *input)
       {executeGiveTo    , "give A to B"},
       {executeGive      , "give A"},
       {executeInventory , "inventory"},
-      {executeOpen      , "open A"},
-      {executeClose     , "close A"},
-      {executeLock      , "lock A"},
-      {executeUnlock    , "unlock A"},
-      {executeTurnOn    , "turn on A"},
-      {executeTurnOff   , "turn off A"},
-      {executeTurnOn    , "turn A on"},
-      {executeTurnOff   , "turn A off"},
       {executeNoMatch   , "A"}
    };
    const COMMAND *cmd;
