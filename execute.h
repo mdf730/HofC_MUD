@@ -7,3 +7,6 @@ extern bool executePutIn(void);
 extern bool executeAskFrom(void);
 extern bool executeGiveTo(void);
 extern bool executeInventory(void);
+extern bool executeFight(void);
+extern bool executeSay(void);
+extern bool executeSayWho(void);

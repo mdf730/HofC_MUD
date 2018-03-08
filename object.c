@@ -38,7 +38,7 @@ static const char *tags28[] = { "east", NULL};
 static const char *tags29[] = { "north", NULL};
 static const char *tags30[] = { "brawler", NULL};
 static const char *tags31[] = { "club", "leg", "table leg", NULL};
-static const char *tags32[] = { "debris", "trash", "rubbish", "wood", NULL};
+static const char *tags32[] = { "debris", "trash", "rubbish", "wood", "junk", NULL};
 static const char *tags33[] = { "north", "west", NULL};
 static const char *tags34[] = { "south", NULL};
 static bool condition35(void)  { return brawler->health <= 0; }
@@ -79,14 +79,14 @@ static const char *tags61[] = { "throne", NULL};
 static const char *tags62[] = { "north", "south", "east", NULL};
 static const char *tags63[] = { "west", NULL};
 static bool condition64(void)  { return coin->location == objectFountain || coin->location == player; }
-static const char *tags64[] = { "trader", "goblin trader", "goblin", NULL};
+static const char *tags64[] = { "trader", "goblin trader", "goblin", "bub", NULL};
 static const char *tags65[] = { "key", "polished key", NULL};
 static bool condition66(void)  { return coin->location != objectFountain && coin->location != player; }
-static const char *tags66[] = { "trader", "goblin trader", "goblin", NULL};
+static const char *tags66[] = { "trader", "goblin trader", "goblin", "bub", NULL};
 static bool condition67(void)  { return goblinBrawlerUndefeated->health > 0; }
-static const char *tags67[] = { "brawler", "goblin brawler", "goblin", NULL};
+static const char *tags67[] = { "brawler", "goblin brawler", "goblin", "bumpy", NULL};
 static bool condition68(void)  { return goblinBrawlerUndefeated->health <= 0; }
-static const char *tags68[] = { "brawler", "goblin brawler", "goblin", NULL};
+static const char *tags68[] = { "brawler", "goblin brawler", "goblin", "bumpy", NULL};
 static const char *tags69[] = { "riddler", "goblin riddler", "goblin", "lerp", NULL};
 static bool condition70(void)  { return goblinGuardUndefeated->health > 0; }
 static const char *tags70[] = { "guard", "goblin guard", "goblin", "frank", NULL};
@@ -106,7 +106,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
-		 "A weathered stone doorway attached to the cliffside stands to your East, vines crawl across the aged rock and water trickles down the jagged precipice and forms pool at its feet. To your West is the road back to the village, spanning across a lush green field. Birds can be heard chirping in the distance.\n",
+		 "A weathered stone doorway attached to the cliffside stands to your East, vines crawl across the aged rock and water trickles down the jagged precipice and forms pool at its feet.\n To your West is the road back to the village, spanning across a lush green field.\n Birds can be heard chirping in the distance.\n",
 		"You see",
 		"You can't get much closer than this.\n",
 		99,
@@ -120,7 +120,7 @@ OBJECT objs[] = {
 		 entrance,
 		 entrance,
 		 entrance,
-		 "A field spreads as far as you can see.\n",
+		 "A field spreads out as far as you can see.\n",
 		"You see",
 		 "You stare off into the distance at the field, but remain where you are.\n",
 		99,
@@ -134,7 +134,7 @@ OBJECT objs[] = {
 		 entrance,
 		 fountainRoom,
 		 fountainRoom,
-		 "Vines crawl across the aged rock and water trickles down the jagged precipice and forms pool at its feet.\n",
+		 "Vines crawl across the aged rock and water trickles down the jagged precipice to forms pools at its feet.\n",
 		"You see",
 		 "You walk through the doorway.\n",
 		99,
@@ -204,7 +204,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
-		 "The room is dimly lit with torch light, yet the air feels damp and humid. A running fountain can be seen in the center of the space; a circular pool with the statue of a goblin spews water from its mouth. Moss grows from the stonework surrounding the fountain and is interspersed around the room structure. There are wooden doors to your North and East.\n",
+		 "The room is dimly lit with torch light, yet the air feels damp and humid.\n A running fountain can be seen in the center of the space; a circular pool with the statue of a goblin spews water from its mouth.\n Moss grows from the stonework surrounding the fountain and is interspersed around the room structure.\n There are wooden doors to your North and East.\n",
 		"You see",
 		"You can't get much closer than this.\n",
 		99,
@@ -288,7 +288,7 @@ OBJECT objs[] = {
 		 fountainRoom,
 		NULL,
 		NULL,
-		 "The water is clear and pristine, the bottom of the fountain is a gravel pattern. At the bottom of the fountain you see something glimmer. It’s a gold coin! It twinkles as the water moves about the surface, refracting the light over it.\n",
+		 "The water is clear and pristine, the bottom of the fountain is a gravel pattern.\n At the bottom of the fountain you see something glimmer. It’s a gold coin!\n It twinkles as the water moves about the surface, refracting the light over it.\n",
 		"You see",
 		"You can't get much closer than this.\n",
 		 100,
@@ -316,7 +316,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
-		 "The room is small but well lit, a goblin sits at the other end of the room and looks at you curiously. On a tattered mat colored with patterns of red and violet is spread out various items, many with distinct shines and gleams. There is a wooden door to your West and a strange pattern of bricks on the wall to your South\n",
+		 "The room is small but well lit, a goblin sits at the other end of the room and looks at you curiously.\n On a tattered mat colored with patterns of red and violet is spread out various items, many with distinct shines and gleams.\n There is a wooden door to your West and a strange pattern of bricks on the wall to your South.\n",
 		"You see",
 		"You can't get much closer than this.\n",
 		99,
@@ -330,10 +330,10 @@ OBJECT objs[] = {
 		 trader,
 		NULL,
 		NULL,
-		 "Spread across the mat in careful tidy rows are various objects, such as smoothed glass, bent silverware, and a single polished key. The goblin guards over the objects closely, preventing them from being taken.\n",
+		 "Spread across the mat in careful tidy rows are various objects, such as smoothed glass, bent silverware, and a single polished key.\n The goblin guards over the objects closely, preventing them from being taken.\n",
 		"You see",
 		"You can't get much closer than this.\n",
-		 9999,
+		 999,
 		0,
 		0
 	},
@@ -400,7 +400,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
-		 "The room is covered with ornate flowery wallpaper of blues, greens, and gold. A neon sign flashes in yellow on the opposite end of the room, it reads ‘You found the secret!’ There is a wooden door to your North.\n",
+		 "The room is covered with ornate flowery wallpaper of blues, greens, and gold.\n A neon sign flashes in yellow on the opposite end of the room, it reads ‘You found the secret!’\n There is a wooden door to your North.\n",
 		"You see",
 		"You can't get much closer than this.\n",
 		99,
@@ -442,7 +442,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
-		 "The huge room expands out in front of you, in the center a round pit descends into an inky blackness. The pits diameter almost meets the sides of the room itself, but leaves enough space to allow passage around the edges. Sitting on the pits edge is a goblin, its feet dangling over. The goblin doesn’t take any notice of you but instead peers downward with a cheery smile on its face, moving its legs like pendulums. There are wooden doors to your North, East and South.\n",
+		 "The huge room expands out in front of you, in the center a round pit descends into an inky blackness.\n The pits diameter almost meets the sides of the room itself, but leaves enough space to allow passage around the edges.\n Sitting on the pits edge is a goblin, its feet dangling over. The goblin doesn’t take any notice of you but instead peers downward with a cheery smile on its face, moving its legs like pendulums.\n There are wooden doors to your North, East and South.\n",
 		"You see",
 		"You can't get much closer than this.\n",
 		99,
@@ -500,7 +500,7 @@ OBJECT objs[] = {
 		 riddler,
 		 "The blue doorway is closed. A lock gleams under the door's handle.\n",
 		"You see",
-		 "You bounce off the door. Ouch.\n",
+		 "You bounce off the wall. Ouch.\n",
 		99,
 		0,
 		0
@@ -526,7 +526,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
-		 "The room is very messy, the ground covered with bits of fractured wooden debri and other rubbish. To the East is a wooden door with the large picture of a key carved on it. Standing between you and the door is a goblin, it has wild eyes and brandishes a club. Every move you make it reacts to as to remain between you and the key door. There are wooden doors to your South and East.\n",
+		 "The room is very messy, the ground covered with bits of fractured wooden debri and other rubbish.\n To the East is a wooden door with the large picture of a key carved on it. Standing between you and the door is a goblin, it has wild eyes and brandishes a club.\n Every move you make it reacts to so to remain between you and the key door.\n There are wooden doors to your South and East.\n",
 		"You see",
 		"You can't get much closer than this.\n",
 		99,
@@ -624,7 +624,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
-		 "The room is small and made of red brick with mortar. On the wall hanging from a rusty coat hook is a single blue key. There is a wooden door to your West.\n",
+		 "The room is small and made of red brick with mortar. On the wall hanging from a rusty coat hook is a single blue key.\n There is a wooden door to your West.\n",
 		"You see",
 		"You can't get much closer than this.\n",
 		99,
@@ -680,7 +680,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
-		 "The long room is lit with lanterns on either sides of the walls, lavender colored wallpaper peels in flakes onto the floor. On the left side sits a goblin upon a wooden stool with a stack of books to its side. The goblin leafs through leather bound tome absentmindedly, only looking up for a second to acknowledge your presence. There are wooden doors to your East and West.\n",
+		 "The long room is lit with lanterns on either sides of the walls, lavender colored wallpaper peels in flakes onto the floor.\n On the left side sits a goblin upon a wooden stool with a stack of books to its side.\n The goblin leafs through leather bound tome absentmindedly, only looking up for a second to acknowledge your presence. There are wooden doors to your East and West.\n",
 		"You see",
 		"You can't get much closer than this.\n",
 		99,
@@ -750,7 +750,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
-		 "The long room stretches to your left and right, rose colored wallpaper peels in flakes onto the floor. Red curtains sway on either corner of the room though they seem to stop moving when you look straight at them. On the edge of the wall are three busts, the first of a goblin with its long nose pointed up, the second with its nose pointing straight ahead, and the third with its nose point down. The busts stand on pedestals and below them are square wooden buttons. There are wooden doors to your West, North, and South.\n",
+		 "The long room stretches to your left and right, rose colored wallpaper peels in flakes onto the floor.\n Red curtains sway on either corner of the room though they seem to stop moving when you look straight at them.\n On the edge of the wall are three busts, the first of a goblin with its long nose pointed up, the second with its nose pointing straight ahead, and the third with its nose point downed.\n The busts stand on pedestals and below them are square wooden buttons. There are wooden doors to your West, North, and South.\n",
 		"You see",
 		"You can't get much closer than this.\n",
 		99,
@@ -834,7 +834,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
-		 "The small room is almost filled to the brim with barrels and crates. A dim lamp on the ceiling only barely makes the room visible. On one of the crates sits an unfurled scroll nailed to the crates frame; it has writing on it. There is a wooden door to your South.\n",
+		 "The small room is almost filled to the brim with barrels and crates. A dim lamp on the ceiling only barely makes the room visible.\n On one of the crates sits an unfurled scroll nailed to the crates frame; it has writing on it.\n There is a wooden door to your South.\n",
 		"You see",
 		"You can't get much closer than this.\n",
 		99,
@@ -848,7 +848,7 @@ OBJECT objs[] = {
 		 store,
 		NULL,
 		NULL,
-		 "The scroll reads ‘Down the road three goblins strolled, moving on their way. One looked up and said to them ‘Looks like rain today.’ The other looked down and commented ‘The grounds all muddy and gray.’ The last looked forward swiftly said ‘Then quite quickly we should be on our way.’",
+		 "The scroll reads ‘Down the road three goblins strolled, moving on their way.\n One looked up and said to them ‘Looks like rain today.’\n The other looked down and commented ‘The grounds all muddy and gray.’\n The last looked forward swiftly said ‘Then quite quickly we should be on our way.’\n",
 		"You see",
 		"You can't get much closer than this.\n",
 		 9999,
@@ -890,7 +890,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
-		 "The room is well lit and covered with ornate silver wallpaper. To your East is a golden door with a cup image engraved on it. Between you and the golden door stands a goblin wearing armor, it holds a steel mace to its side. The goblins eyes are stern and its stance is disciplined. There is a wooden door to your North and a golden door to your East.\n",
+		 "The room is well lit and covered with ornate silver wallpaper. To your East is a golden door with a cup image engraved on it.\n Between you and the golden door stands a goblin wearing armor, it holds a steel mace to its side.\n The goblins eyes are stern and its stance is disciplined. There is a wooden door to your North and a golden door to your East.\n",
 		"You see",
 		"You can't get much closer than this.\n",
 		99,
@@ -960,7 +960,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
-		 "The room glimmers with jewels and fine tapestries of red and violet. Sitting on a gold throne is a goblin wearing a crown and draped in ornate robes. It holds the Goblin Goblet in its hands in front of you.\n",
+		 "The room glimmers with jewels and fine tapestries of red and violet.\n Sitting on a gold throne is a goblin wearing a crown and draped in ornate robes.\n It holds the Goblin Goblet in its hands in front of you.\n",
 		"You see",
 		"You can't get much closer than this.\n",
 		99,
@@ -1013,7 +1013,7 @@ OBJECT objs[] = {
 		alwaysTrue,
 		 "a polished key",
 		tags65,
-		 goblinTraderNoCoin,
+		 goblinTraderHasCoin,
 		NULL,
 		NULL,
 		 "The key is polished and has a dull glint.\n",
@@ -1030,7 +1030,7 @@ OBJECT objs[] = {
 		 trader,
 		NULL,
 		NULL,
-		 "The goblin say’s ‘Oh yes! This is very shiny shiny! Here, you have have this less shiny shiny in return.’ The Goblin hands you a polished key.\n",
+		 "The goblin say’s ‘Oh yes! This is very shiny shiny! Here, you have have this less shiny shiny in return.’ (Type 'get key from bub').\n",
 		 "He has",
 		"You can't get much closer than this.\n",
 		99,
@@ -1049,7 +1049,7 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		99,
 		 20,
-		 3
+		 50
 	},
 	{	/* 68 = goblinBrawlerDefeated */
 		condition68,
@@ -1063,7 +1063,7 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		99,
 		 20,
-		 100
+		 0
 	},
 	{	/* 69 = goblinRiddler */
 		alwaysTrue,
@@ -1072,7 +1072,7 @@ OBJECT objs[] = {
 		 riddler,
 		NULL,
 		NULL,
-		 "The goblin says ‘Hmm greetings! I an Lerp the Riddlemaster. I suppose you wish to go through that door over there. Hmm quite, quite. Well, I can open that door for you if you can solve my riddle!’/n ‘I have lots to say but never speak,’/n ‘I open but you cannot walk through me,’/n ‘I have a spine but no bones.’/n ‘What am I?’\n",
+		 "The goblin says ‘Hmm greetings! I an Lerp the Riddlemaster. I suppose you wish to go through that door over there. Hmm quite, quite. Well, I can open that door for you if you can solve my riddle!’ ‘I have lots to say but never speak,’ ‘I open but you cannot walk through me,’ ‘I have a spine but no bones.’ ‘What am I?’",
 		 "He has",
 		"You can't get much closer than this.\n",
 		99,
@@ -1091,7 +1091,7 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		99,
 		 20,
-		 6
+		 75
 	},
 	{	/* 71 = goblinGuardDefeated */
 		condition71,
@@ -1105,7 +1105,7 @@ OBJECT objs[] = {
 		"You can't get much closer than this.\n",
 		99,
 		 20,
-		 100
+		 0
 	},
 	{	/* 72 = goblinKing */
 		alwaysTrue,
@@ -1139,7 +1139,7 @@ OBJECT objs[] = {
 		alwaysTrue,
 		 "yourself",
 		tags74,
-		 entrance,
+		 riddler,
 		NULL,
 		NULL,
 		 "You would need a mirror to look at yourself.\n",

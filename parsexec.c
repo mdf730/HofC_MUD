@@ -6,22 +6,18 @@
 #include "location.h"
 #include "execute.h"
 
-typedef struct
-{
+typedef struct{
    bool (*function)(void);
    const char *pattern;
 } COMMAND;
 
-static bool executeQuit(void)
-{
+static bool executeQuit(void){
    return false;
 }
 
-static bool executeNoMatch(void)
-{
+static bool executeNoMatch(void){
    const char *src = *params;
-   if (*src != '\0')
-   {
+   if (*src != '\0'){
       printf("I don't know how to '");
       while (*src != '\0' && !isspace(*src)) putchar(*src++);
       printf("'.\n");
@@ -29,18 +25,22 @@ static bool executeNoMatch(void)
    return true;
 }
 
-bool parseAndExecute(const char *input)
-{
+bool parseAndExecute(const char *input){
    static const COMMAND commands[] =
    {
       {executeQuit      , "quit"},
+      {executeQuit      , "exit"},
+      {executeQuit      , "q"},
+      {executeQuit      , "leave"},
       {executeLookAround, "look"},
       {executeLookAround, "look around"},
       {executeLook      , "look at A"},
       {executeLook      , "look A"},
+      {executeLook      , "read A"},
       {executeGo        , "go to A"},
       {executeGo        , "go A"},
       {executeGetFrom   , "get A from B"},
+      {executeGetFrom   , "ask A for B"},
       {executeGet       , "get A"},
       {executeGet       , "take A"},
       {executePutIn     , "put A in B"},
@@ -51,6 +51,11 @@ bool parseAndExecute(const char *input)
       {executeGiveTo    , "give A to B"},
       {executeGive      , "give A"},
       {executeInventory , "inventory"},
+      {executeFight     , "fight the A"},
+      {executeFight     , "fight A"},
+      {executeSay       , "tell B A"},
+      {executeSay       , "say A to B"},
+      {executeSayWho    , "say A"},
       {executeNoMatch   , "A"}
    };
    const COMMAND *cmd;
