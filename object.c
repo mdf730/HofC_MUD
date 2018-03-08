@@ -57,44 +57,48 @@ static const char *tags44[] = { "east", NULL};
 static bool condition45(void)  { return goblinRiddler->health > 50; }
 static const char *tags45[] = { "east", NULL};
 static const char *tags46[] = { "gallery", NULL};
-static const char *tags47[] = { "east", NULL};
-static const char *tags48[] = { "north", NULL};
-static bool condition49(void)  { return threeGoblins->health <= 0; }
-static const char *tags49[] = { "south", NULL};
-static bool condition50(void)  { return threeGoblins->health > 0; }
-static const char *tags50[] = { "south", NULL};
-static const char *tags51[] = { "west", NULL};
-static const char *tags52[] = { "store", NULL};
-static const char *tags53[] = { "scroll", "unfurled scroll", NULL};
-static const char *tags54[] = { "north", "east", "west", NULL};
-static const char *tags55[] = { "south", NULL};
-static const char *tags56[] = { "guard", NULL};
-static const char *tags57[] = { "south", "west", NULL};
-static const char *tags58[] = { "north", NULL};
-static bool condition59(void)  {return goblinGuardUndefeated->health <= 0; }
-static const char *tags59[] = { "east", NULL};
-static bool condition60(void)  {return goblinGuardUndefeated->health > 0; }
-static const char *tags60[] = { "east", NULL};
-static const char *tags61[] = { "throne", NULL};
-static const char *tags62[] = { "north", "south", "east", NULL};
-static const char *tags63[] = { "west", NULL};
-static bool condition64(void)  { return coin->location == objectFountain || coin->location == player; }
-static const char *tags64[] = { "trader", "goblin trader", "goblin", "bub", NULL};
-static const char *tags65[] = { "key", "polished key", NULL};
-static bool condition66(void)  { return coin->location != objectFountain && coin->location != player; }
-static const char *tags66[] = { "trader", "goblin trader", "goblin", "bub", NULL};
-static bool condition67(void)  { return goblinBrawlerUndefeated->health > 0; }
-static const char *tags67[] = { "brawler", "goblin brawler", "goblin", "bumpy", NULL};
-static bool condition68(void)  { return goblinBrawlerUndefeated->health <= 0; }
-static const char *tags68[] = { "brawler", "goblin brawler", "goblin", "bumpy", NULL};
-static const char *tags69[] = { "riddler", "goblin riddler", "goblin", "lerp", NULL};
-static bool condition70(void)  { return goblinGuardUndefeated->health > 0; }
-static const char *tags70[] = { "guard", "goblin guard", "goblin", "frank", NULL};
-static bool condition71(void)  { return goblinGuardDefeated->health <= 0; }
-static const char *tags71[] = { "guard", "goblin guard", "goblin", "frank", NULL};
-static const char *tags72[] = { "king", "goblin king", "goblin", NULL};
-static const char *tags73[] = { "three", "goblins", NULL};
-static const char *tags74[] = { "yourself", NULL};
+static const char *tags47[] = { "bust", "pedestal", "statue", "busts", "statues", "pedestals", NULL};
+static const char *tags48[] = { "button one", "first button", "1st button", "button 1", "1", "one", "button", NULL};
+static const char *tags49[] = { "button two", "first button", "2nd button", "button 2", "2", "two", "button", NULL};
+static const char *tags50[] = { "button three", "third button", "3rd button", "button 3", "3", "three", "button", NULL};
+static const char *tags51[] = { "east", NULL};
+static const char *tags52[] = { "north", NULL};
+static bool condition53(void)  { return threeGoblins->health <= 0; }
+static const char *tags53[] = { "south", NULL};
+static bool condition54(void)  { return threeGoblins->health > 0; }
+static const char *tags54[] = { "south", NULL};
+static const char *tags55[] = { "west", NULL};
+static const char *tags56[] = { "store", NULL};
+static const char *tags57[] = { "scroll", "unfurled scroll", NULL};
+static const char *tags58[] = { "north", "east", "west", NULL};
+static const char *tags59[] = { "south", NULL};
+static const char *tags60[] = { "guard", NULL};
+static const char *tags61[] = { "south", "west", NULL};
+static const char *tags62[] = { "north", NULL};
+static bool condition63(void)  {return goblinGuardUndefeated->health <= 0; }
+static const char *tags63[] = { "east", NULL};
+static bool condition64(void)  {return goblinGuardUndefeated->health > 0; }
+static const char *tags64[] = { "east", NULL};
+static const char *tags65[] = { "throne", NULL};
+static const char *tags66[] = { "north", "south", "east", NULL};
+static const char *tags67[] = { "west", NULL};
+static bool condition68(void)  { return coin->location == objectFountain || coin->location == player; }
+static const char *tags68[] = { "trader", "goblin trader", "goblin", "bub", NULL};
+static const char *tags69[] = { "key", "polished key", NULL};
+static bool condition70(void)  { return coin->location != objectFountain && coin->location != player; }
+static const char *tags70[] = { "trader", "goblin trader", "goblin", "bub", NULL};
+static bool condition71(void)  { return goblinBrawlerUndefeated->health > 0; }
+static const char *tags71[] = { "brawler", "goblin brawler", "goblin", "bumpy", NULL};
+static bool condition72(void)  { return goblinBrawlerUndefeated->health <= 0; }
+static const char *tags72[] = { "brawler", "goblin brawler", "goblin", "bumpy", NULL};
+static const char *tags73[] = { "riddler", "goblin riddler", "goblin", "lerp", NULL};
+static bool condition74(void)  { return goblinGuardUndefeated->health > 0; }
+static const char *tags74[] = { "guard", "goblin guard", "goblin", "frank", NULL};
+static bool condition75(void)  { return goblinGuardUndefeated->health <= 0; }
+static const char *tags75[] = { "guard", "goblin guard", "goblin", "frank", NULL};
+static const char *tags76[] = { "king", "goblin king", "goblin", NULL};
+static const char *tags77[] = { "trigger", NULL};
+static const char *tags78[] = { "yourself", NULL};
 
 static bool alwaysTrue(void) { return true; }
 
@@ -757,10 +761,66 @@ OBJECT objs[] = {
 		 9999,
 		0
 	},
-	{	/* 47 = wallGallery */
+	{	/* 47 = pedestals */
+		alwaysTrue,
+		 "pedestals",
+		tags47,
+		 gallery,
+		NULL,
+		NULL,
+		 "The pedestals hold three busts, the first of a goblin with its long nose pointed up, the second with its nose pointing straight ahead, and the third with its nose point downed. The buttons are labeled one, two, and three respectively.\n",
+		"You see",
+		"You can't get much closer than this.\n",
+		 9999,
+		0,
+		0
+	},
+	{	/* 48 = buttonOne */
+		alwaysTrue,
+		 "button one",
+		tags48,
+		 pedestals,
+		NULL,
+		NULL,
+		 "The button is below a bust of a goblin, its long nose pointed toward the ceiling.\n",
+		"You see",
+		"You can't get much closer than this.\n",
+		 9999,
+		0,
+		 -1
+	},
+	{	/* 49 = buttonTwo */
+		alwaysTrue,
+		 "button two",
+		tags49,
+		 pedestals,
+		NULL,
+		NULL,
+		 "The button is below a bust of a goblin, its short nose pointing ahead.\n",
+		"You see",
+		"You can't get much closer than this.\n",
+		 9999,
+		0,
+		 -1
+	},
+	{	/* 50 = buttonThree */
+		alwaysTrue,
+		 "button three",
+		tags50,
+		 pedestals,
+		NULL,
+		NULL,
+		 "The button is below a bust of a goblin, its long noise pointed toward the ceiling.\n",
+		"You see",
+		"You can't get much closer than this.\n",
+		 9999,
+		0,
+		 -1
+	},
+	{	/* 51 = wallGallery */
 		alwaysTrue,
 		NULL,
-		tags47,
+		tags51,
 		 gallery,
 		 gallery,
 		 gallery,
@@ -771,10 +831,10 @@ OBJECT objs[] = {
 		0,
 		0
 	},
-	{	/* 48 = galleryToStore */
+	{	/* 52 = galleryToStore */
 		alwaysTrue,
 		 "a wooden doorway to the north",
-		tags48,
+		tags52,
 		 gallery,
 		 store,
 		 store,
@@ -785,10 +845,10 @@ OBJECT objs[] = {
 		0,
 		0
 	},
-	{	/* 49 = galleryToGuard */
-		condition49,
+	{	/* 53 = galleryToGuard */
+		condition53,
 		 "an ornate doorway to the south",
-		tags49,
+		tags53,
 		 gallery,
 		 guard,
 		 guard,
@@ -799,10 +859,10 @@ OBJECT objs[] = {
 		0,
 		0
 	},
-	{	/* 50 = galleryToGuardBlocked */
-		condition50,
+	{	/* 54 = galleryToGuardBlocked */
+		condition54,
 		 "an ornate doorway to the south",
-		tags50,
+		tags54,
 		 gallery,
 		NULL,
 		 guard,
@@ -813,10 +873,10 @@ OBJECT objs[] = {
 		0,
 		0
 	},
-	{	/* 51 = galleryToRiddler */
+	{	/* 55 = galleryToRiddler */
 		alwaysTrue,
 		 "a wooden doorway to the west",
-		tags51,
+		tags55,
 		 gallery,
 		 riddler,
 		 riddler,
@@ -827,10 +887,10 @@ OBJECT objs[] = {
 		0,
 		0
 	},
-	{	/* 52 = store */
+	{	/* 56 = store */
 		alwaysTrue,
 		 "Storeroom",
-		tags52,
+		tags56,
 		NULL,
 		NULL,
 		NULL,
@@ -841,24 +901,24 @@ OBJECT objs[] = {
 		 9999,
 		0
 	},
-	{	/* 53 = scroll */
+	{	/* 57 = scroll */
 		alwaysTrue,
 		 "an unfurled scroll",
-		tags53,
+		tags57,
 		 store,
 		NULL,
 		NULL,
 		 "The scroll reads ‘Down the road three goblins strolled, moving on their way.\n One looked up and said to them ‘Looks like rain today.’\n The other looked down and commented ‘The grounds all muddy and gray.’\n The last looked forward swiftly said ‘Then quite quickly we should be on our way.’\n",
 		"You see",
 		"You can't get much closer than this.\n",
-		 9999,
+		 10,
 		0,
 		0
 	},
-	{	/* 54 = wallStore */
+	{	/* 58 = wallStore */
 		alwaysTrue,
 		NULL,
-		tags54,
+		tags58,
 		 store,
 		 store,
 		 store,
@@ -869,10 +929,10 @@ OBJECT objs[] = {
 		0,
 		0
 	},
-	{	/* 55 = storeToGallery */
+	{	/* 59 = storeToGallery */
 		alwaysTrue,
 		 "a wooden doorway to the south",
-		tags55,
+		tags59,
 		 store,
 		 gallery,
 		 gallery,
@@ -883,10 +943,10 @@ OBJECT objs[] = {
 		0,
 		0
 	},
-	{	/* 56 = guard */
+	{	/* 60 = guard */
 		alwaysTrue,
 		 "Guard Room",
-		tags56,
+		tags60,
 		NULL,
 		NULL,
 		NULL,
@@ -897,10 +957,10 @@ OBJECT objs[] = {
 		 9999,
 		0
 	},
-	{	/* 57 = wallGuard */
+	{	/* 61 = wallGuard */
 		alwaysTrue,
 		NULL,
-		tags57,
+		tags61,
 		 guard,
 		 guard,
 		 guard,
@@ -911,10 +971,10 @@ OBJECT objs[] = {
 		0,
 		0
 	},
-	{	/* 58 = guardToGallery */
+	{	/* 62 = guardToGallery */
 		alwaysTrue,
 		 "a wooden doorway to the north",
-		tags58,
+		tags62,
 		 guard,
 		 gallery,
 		 gallery,
@@ -925,24 +985,24 @@ OBJECT objs[] = {
 		0,
 		0
 	},
-	{	/* 59 = guardToThrone */
-		condition59,
-		 "a wooden doorway to the east",
-		tags59,
+	{	/* 63 = guardToThrone */
+		condition63,
+		 "a golden doorway to the east",
+		tags63,
 		 guard,
 		 throne,
 		 throne,
-		 "A wooden doorway.\n",
+		 "A golden doorway.\n",
 		"You see",
 		 "You walk through the doorway.\n",
 		99,
 		0,
 		0
 	},
-	{	/* 60 = guardToThroneBlocked */
-		condition60,
-		 "a wooden doorway to the east",
-		tags60,
+	{	/* 64 = guardToThroneBlocked */
+		condition64,
+		 "a golden doorway to the east",
+		tags64,
 		 guard,
 		NULL,
 		 throne,
@@ -953,10 +1013,10 @@ OBJECT objs[] = {
 		0,
 		0
 	},
-	{	/* 61 = throne */
+	{	/* 65 = throne */
 		alwaysTrue,
 		 "The Throne Room",
-		tags61,
+		tags65,
 		NULL,
 		NULL,
 		NULL,
@@ -967,10 +1027,10 @@ OBJECT objs[] = {
 		 9999,
 		0
 	},
-	{	/* 62 = wallThrone */
+	{	/* 66 = wallThrone */
 		alwaysTrue,
 		NULL,
-		tags62,
+		tags66,
 		 throne,
 		 throne,
 		 throne,
@@ -981,24 +1041,24 @@ OBJECT objs[] = {
 		0,
 		0
 	},
-	{	/* 63 = throneToGuard */
+	{	/* 67 = throneToGuard */
 		alwaysTrue,
-		 "a wooden doorway to the west",
-		tags63,
+		 "a golden doorway to the west",
+		tags67,
 		 throne,
 		 guard,
 		 guard,
-		 "A wooden doorway.\n",
+		 "A golden doorway.\n",
 		"You see",
 		 "You walk through the doorway.\n",
 		99,
 		0,
 		0
 	},
-	{	/* 64 = goblinTraderNoCoin */
-		condition64,
+	{	/* 68 = goblinTraderNoCoin */
+		condition68,
 		 "Bub the Trader of Shinies",
-		tags64,
+		tags68,
 		 trader,
 		NULL,
 		NULL,
@@ -1009,10 +1069,10 @@ OBJECT objs[] = {
 		 20,
 		 100
 	},
-	{	/* 65 = polishedKey */
+	{	/* 69 = polishedKey */
 		alwaysTrue,
 		 "a polished key",
-		tags65,
+		tags69,
 		 goblinTraderHasCoin,
 		NULL,
 		NULL,
@@ -1023,10 +1083,10 @@ OBJECT objs[] = {
 		0,
 		0
 	},
-	{	/* 66 = goblinTraderHasCoin */
-		condition66,
+	{	/* 70 = goblinTraderHasCoin */
+		condition70,
 		 "Bub the Trader of Shinies",
-		tags66,
+		tags70,
 		 trader,
 		NULL,
 		NULL,
@@ -1037,10 +1097,10 @@ OBJECT objs[] = {
 		 20,
 		 100
 	},
-	{	/* 67 = goblinBrawlerUndefeated */
-		condition67,
+	{	/* 71 = goblinBrawlerUndefeated */
+		condition71,
 		 "Bumpy the Cudgelist",
-		tags67,
+		tags71,
 		 brawler,
 		NULL,
 		NULL,
@@ -1051,10 +1111,10 @@ OBJECT objs[] = {
 		 20,
 		 50
 	},
-	{	/* 68 = goblinBrawlerDefeated */
-		condition68,
+	{	/* 72 = goblinBrawlerDefeated */
+		condition72,
 		 "Bumpy the Cudgelist",
-		tags68,
+		tags72,
 		 brawler,
 		NULL,
 		NULL,
@@ -1065,10 +1125,10 @@ OBJECT objs[] = {
 		 20,
 		 0
 	},
-	{	/* 69 = goblinRiddler */
+	{	/* 73 = goblinRiddler */
 		alwaysTrue,
 		 "Lerp the Riddlemaster",
-		tags69,
+		tags73,
 		 riddler,
 		NULL,
 		NULL,
@@ -1079,10 +1139,10 @@ OBJECT objs[] = {
 		 20,
 		 100
 	},
-	{	/* 70 = goblinGuardUndefeated */
-		condition70,
+	{	/* 74 = goblinGuardUndefeated */
+		condition74,
 		 "Royal Gobo Guard Frank",
-		tags70,
+		tags74,
 		 guard,
 		NULL,
 		NULL,
@@ -1093,10 +1153,10 @@ OBJECT objs[] = {
 		 20,
 		 75
 	},
-	{	/* 71 = goblinGuardDefeated */
-		condition71,
+	{	/* 75 = goblinGuardDefeated */
+		condition75,
 		 "Royal Gobo Guard Frank",
-		tags71,
+		tags75,
 		 guard,
 		NULL,
 		NULL,
@@ -1107,10 +1167,10 @@ OBJECT objs[] = {
 		 20,
 		 0
 	},
-	{	/* 72 = goblinKing */
+	{	/* 76 = goblinKing */
 		alwaysTrue,
 		 "King Gobo, Keeper of the Goblin Goblet",
-		tags72,
+		tags76,
 		 throne,
 		NULL,
 		NULL,
@@ -1121,11 +1181,11 @@ OBJECT objs[] = {
 		 20,
 		 100
 	},
-	{	/* 73 = threeGoblins */
+	{	/* 77 = threeGoblins */
 		alwaysTrue,
 		NULL,
-		tags73,
-		NULL,
+		tags77,
+		 gallery,
 		NULL,
 		NULL,
 		"You see nothing special.\n",
@@ -1135,11 +1195,11 @@ OBJECT objs[] = {
 		0,
 		 100
 	},
-	{	/* 74 = player */
+	{	/* 78 = player */
 		alwaysTrue,
 		 "yourself",
-		tags74,
-		 riddler,
+		tags78,
+		 entrance,
 		NULL,
 		NULL,
 		 "You would need a mirror to look at yourself.\n",

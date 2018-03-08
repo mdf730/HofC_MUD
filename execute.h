@@ -10,3 +10,4 @@ extern bool executeInventory(void);
 extern bool executeFight(void);
 extern bool executeSay(void);
 extern bool executeSayWho(void);
+extern bool executePush(void);

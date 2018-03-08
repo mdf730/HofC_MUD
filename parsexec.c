@@ -53,9 +53,13 @@ bool parseAndExecute(const char *input){
       {executeInventory , "inventory"},
       {executeFight     , "fight the A"},
       {executeFight     , "fight A"},
+      {executeFight     , "attack A"},
       {executeSay       , "tell B A"},
       {executeSay       , "say A to B"},
       {executeSayWho    , "say A"},
+      {executePush      , "push A"},
+      {executePush      , "touch A"},
+      {executePush      , "press A"},
       {executeNoMatch   , "A"}
    };
    const COMMAND *cmd;

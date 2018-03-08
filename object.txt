@@ -372,6 +372,37 @@ extern OBJECT objs[];
      details     "The long room stretches to your left and right, rose colored wallpaper peels in flakes onto the floor.\n Red curtains sway on either corner of the room though they seem to stop moving when you look straight at them.\n On the edge of the wall are three busts, the first of a goblin with its long nose pointed up, the second with its nose pointing straight ahead, and the third with its nose point downed.\n The busts stand on pedestals and below them are square wooden buttons. There are wooden doors to your West, North, and South.\n"
      capacity    9999
 
+- pedestals
+     description "pedestals"
+     tags        "bust", "pedestal", "statue", "busts", "statues", "pedestals"
+     location    gallery
+     details     "The pedestals hold three busts, the first of a goblin with its long nose pointed up, the second with its nose pointing straight ahead, and the third with its nose point downed. The buttons are labeled one, two, and three respectively.\n"
+     weight      9999
+
+- buttonOne
+     description "button one"
+     tags        "button one", "first button", "1st button", "button 1", "1", "one", "button"
+     location    pedestals
+     details     "The button is below a bust of a goblin, its long nose pointed toward the ceiling.\n"
+     health      -1
+     weight      9999
+
+- buttonTwo
+     description "button two"
+     tags        "button two", "first button", "2nd button", "button 2", "2", "two", "button"
+     location    pedestals
+     details     "The button is below a bust of a goblin, its short nose pointing ahead.\n"
+     health      -1
+     weight      9999
+
+- buttonThree
+     description "button three"
+     tags        "button three", "third button", "3rd button", "button 3", "3", "three", "button"
+     location    pedestals
+     details     "The button is below a bust of a goblin, its long noise pointed toward the ceiling.\n"
+     health      -1
+     weight      9999
+
 - wallGallery
      tags        "east"
      location    gallery
@@ -424,7 +455,7 @@ extern OBJECT objs[];
      tags        "scroll", "unfurled scroll"
      location    store
      details     "The scroll reads ‘Down the road three goblins strolled, moving on their way.\n One looked up and said to them ‘Looks like rain today.’\n The other looked down and commented ‘The grounds all muddy and gray.’\n The last looked forward swiftly said ‘Then quite quickly we should be on our way.’\n"
-     weight      9999
+     weight      10
 
 - wallStore
      tags        "north", "east", "west"
@@ -464,16 +495,16 @@ extern OBJECT objs[];
 
 - guardToThrone
      condition   {return goblinGuardUndefeated->health <= 0; }
-     description "a wooden doorway to the east"
+     description "a golden doorway to the east"
      tags        "east"
      location    guard
      destination throne
-     details     "A wooden doorway.\n"
+     details     "A golden doorway.\n"
      textGo      "You walk through the doorway.\n"
 
 - guardToThroneBlocked
      condition   {return goblinGuardUndefeated->health > 0; }
-     description "a wooden doorway to the east"
+     description "a golden doorway to the east"
      tags        "east"
      location    guard
      prospect    throne
@@ -494,11 +525,11 @@ extern OBJECT objs[];
      textGo      "You play in the tapestry for a bit before returning to the center of the throne room.\n"
 
 - throneToGuard
-     description "a wooden doorway to the west"
+     description "a golden doorway to the west"
      tags        "west"
      location    throne
      destination guard
-     details     "A wooden doorway.\n"
+     details     "A golden doorway.\n"
      textGo      "You walk through the doorway.\n"
 
 - goblinTraderNoCoin
@@ -568,7 +599,7 @@ extern OBJECT objs[];
      capacity    20
 
 - goblinGuardDefeated
-     condition { return goblinGuardDefeated->health <= 0; }
+     condition   { return goblinGuardUndefeated->health <= 0; }
      description "Royal Gobo Guard Frank"
      tags        "guard", "goblin guard", "goblin", "frank"
      location    guard
@@ -587,13 +618,14 @@ extern OBJECT objs[];
      capacity    20
 
 - threeGoblins
-     tags        "three", "goblins"
+     tags        "trigger"
+     location    gallery
      health      100
 
 - player
      description "yourself"
      tags        "yourself"
-     location    riddler
+     location    entrance
      details     "You would need a mirror to look at yourself.\n"
      contents    "You have"
      health      100

@@ -16,7 +16,7 @@ bool objectHasTag(OBJECT *obj, const char *noun){
 
 static OBJECT ambiguousNoun;
 
-static OBJECT *getObject(const char *noun, OBJECT *from, DISTANCE maxDistance){
+OBJECT *getObject(const char *noun, OBJECT *from, DISTANCE maxDistance){
    OBJECT *obj, *res = NULL;
    forEachObject(obj){
       if (objectHasTag(obj, noun) && getDistance(from, obj) <= maxDistance){

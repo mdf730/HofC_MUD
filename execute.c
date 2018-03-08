@@ -88,25 +88,38 @@ bool executeInventory(void){
 
 bool executeFight(void){
    OBJECT *enemy = reachableObject("who to fight", params[0]);
+   //OBJECT *weapon = getObject("club", player, distOverthere);
+
    if(enemy != NULL){
+      int health = enemy->health;
+
       // Check if fightable
-      if (enemy->health <= 0){
+      if (health <= 0){
          printf("What? But why?\n");
          return true;
       }
 
       // Attack
-      //if (club->location == player){
+      if (club->location == player){
          int damage = rand() % 40;
          if (damage < 5) damage = 0;
          enemy->health = enemy->health - damage;
          int remainingHealth = (enemy->health > 0) ? enemy->health : 0;
          printf("You deal %d points of damage to %s. Remaining health: %d.\n", damage, enemy->description, remainingHealth);
-      //}else{
-      //   printf("You are to feeble to fight with your bare hands. If only you had a weapon...\n");
-      //}
+      }else{
+         printf("You are to feeble to fight with your bare hands. If only you had a weapon...\n");
+      }
 
-      // Defend
+      //Defend
+      if(enemy->health >= 5){
+         int damage = rand() % 10;
+         printf("%s attacks you! They deal %d damage.\n",enemy->description, damage);
+         player->health -= damage;
+      }else if(health <=0){
+         printf("Why attack something that can't fight back? Lose 5 health for rudeness.\n");
+         player->health -= 5;
+      }
+
    }
 
    return true;
@@ -147,6 +160,68 @@ bool executeSayWho(void){
 
    }else{
       printf("I don't know who to say that to - be more specific.\n");
+   }
+
+   return true;
+}
+
+bool executePush(void){
+   OBJECT *pushed = getVisible("what to push", params[0]);
+   OBJECT *one = getVisible("button ERROR?", "button one");
+   OBJECT *two = getVisible("button ERROR?", "button two");
+   OBJECT *three = getVisible("button ERROR?", "button three");
+   OBJECT *trigger = getVisible("door ERROR?", "trigger");
+
+   if(!objectHasTag(pushed,"button")){
+      printf("Nothing happends.\n");
+      return true;
+   }
+
+   if (pushed == NULL){
+      return true;
+   }
+
+   if(pushed->health == 0){
+      printf("That button was already pushed!\n");
+      return true;
+   }
+
+   // Button One (press first)
+   if(pushed->description == one->description){
+      if(three->health == 0){
+         printf("It appears you did something incorrectly. The buttons have all been unpressed, but the door is still locked.\n");
+         one->health = -1;
+         two->health = -1;
+         three->health = -1;     
+      }else{
+         printf("You press the button. Out of the corner of your eye, it appears that the goblin bust moved ever so slightly.\n");
+         one->health = 0;
+      }
+   }
+
+   // Button Two (press third)
+   if(pushed->description == two->description){
+      if((one->health == 0)&&(three->health == 0)){
+         printf("Pressing the button releases a hidden trigger, and the ornate door springs open. You are free to pass.\n");
+         trigger->health = 0;
+      }else{
+         printf("You push the button. Nothing else seems to happen.\n");
+         two->health = 0;
+      }
+   }
+
+   // Button Three (press second)
+   if(pushed->description == three->description){
+      if(two->health == 0){
+         printf("It appears you did something incorrectly. The buttons have all been unpressed, but the door is still locked.\n");
+         one->health = -1;
+         two->health = -1;
+         three->health = -1;     
+      }else{
+         printf("You push the button. Nothing else seems to happen.\n");
+         three->health = 0;
+      }
+      
    }
 
    return true;
